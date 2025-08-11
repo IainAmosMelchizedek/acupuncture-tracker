@@ -421,35 +421,102 @@
 
                 <!-- Tongue Assessment -->
                 <h4>Tongue Assessment</h4>
+                <p style="font-style: italic; color: #666; margin-bottom: 20px; font-size: 0.9rem;">
+                    Observe tongue for no more than 20 seconds. Look from tip to back, then sides.
+                </p>
+                
+                <!-- Row 1: Body Color and Coating -->
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="tongueColor">Tongue Color:</label>
-                        <select id="tongueColor">
-                            <option value="">Select Color</option>
-                            <option value="Pale">Pale</option>
+                        <label for="tongueBodyColor">Tongue Body Color:</label>
+                        <select id="tongueBodyColor">
+                            <option value="">Select Body Color</option>
                             <option value="Normal Pink">Normal Pink</option>
-                            <option value="Red">Red</option>
-                            <option value="Deep Red">Deep Red</option>
-                            <option value="Purple">Purple</option>
+                            <option value="Pale">Pale (Qi/Blood deficiency)</option>
+                            <option value="Red">Red (Heat/inflammation)</option>
+                            <option value="Deep Red">Deep Red (Severe heat)</option>
+                            <option value="Purple">Purple (Blood stagnation)</option>
+                            <option value="Purple-Dark">Purple-Dark (Severe stagnation)</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="tongueCoating">Tongue Coating:</label>
                         <select id="tongueCoating">
                             <option value="">Select Coating</option>
-                            <option value="None">None</option>
-                            <option value="Thin White">Thin White</option>
-                            <option value="Thick White">Thick White</option>
-                            <option value="Thin Yellow">Thin Yellow</option>
-                            <option value="Thick Yellow">Thick Yellow</option>
-                            <option value="Gray/Black">Gray/Black</option>
+                            <option value="Thin White">Thin White (Healthy/balanced)</option>
+                            <option value="Thick White">Thick White (Dampness/phlegm)</option>
+                            <option value="Greasy White">Greasy White (Dampness/food stagnation)</option>
+                            <option value="Thin Yellow">Thin Yellow (Mild heat)</option>
+                            <option value="Thick Yellow">Thick Yellow (Heat in digestive system)</option>
+                            <option value="Greasy Yellow">Greasy Yellow (Damp-heat)</option>
+                            <option value="Gray/Black">Gray/Black (Severe internal heat)</option>
+                            <option value="No Coating">No Coating (Yin deficiency)</option>
+                            <option value="Peeled Coating">Peeled/Patchy Coating</option>
                         </select>
                     </div>
                 </div>
+
+                <!-- Row 2: Texture and Movement -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="tongueTexture">Tongue Texture:</label>
+                        <select id="tongueTexture">
+                            <option value="">Select Texture</option>
+                            <option value="Normal">Normal</option>
+                            <option value="Swollen">Swollen (Dampness/Qi deficiency)</option>
+                            <option value="Swollen Scalloped">Swollen with Scalloped Edges</option>
+                            <option value="Thin">Thin (Blood/Yin deficiency)</option>
+                            <option value="Cracked">Cracked (Yin deficiency)</option>
+                            <option value="Deep Cracks">Deep Cracks (Severe Yin deficiency)</option>
+                            <option value="Geographic">Geographic Tongue (Patchy)</option>
+                            <option value="Rough">Rough/Bumpy Surface</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="tongueMovement">Tongue Movement:</label>
+                        <select id="tongueMovement">
+                            <option value="">Select Movement</option>
+                            <option value="Normal">Normal/Flexible</option>
+                            <option value="Quivering">Quivering (Qi deficiency/anxiety)</option>
+                            <option value="Trembling">Trembling (Spleen Qi Xu/stress)</option>
+                            <option value="Flaccid">Flaccid (Severe Qi/Blood deficiency)</option>
+                            <option value="Stiff">Stiff (Internal wind/blood stagnation)</option>
+                            <option value="Deviated">Deviated to one side (Internal wind)</option>
+                            <option value="Curled">Curled/Contracted</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Row 3: Location-Specific Observations -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="tongueTip">Tongue Tip (Heart/Emotional state):</label>
+                        <select id="tongueTip">
+                            <option value="">Select Tip Condition</option>
+                            <option value="Normal">Normal</option>
+                            <option value="Red">Red (Emotional stress/heart heat)</option>
+                            <option value="Very Red">Very Red (Severe emotional agitation)</option>
+                            <option value="Pale">Pale (Heart Qi deficiency)</option>
+                            <option value="Spots">Red spots/bumps</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="tongueSides">Tongue Sides (Liver/Gallbladder):</label>
+                        <select id="tongueSides">
+                            <option value="">Select Sides Condition</option>
+                            <option value="Normal">Normal</option>
+                            <option value="Red">Red (Liver heat/anger)</option>
+                            <option value="Dark Red">Dark Red (Liver fire)</option>
+                            <option value="Pale">Pale (Liver blood deficiency)</option>
+                            <option value="Teeth Marks">Teeth marks/indentations</option>
+                        </select>
+                    </div>
+                </div>
+
                 <div class="form-row">
                     <div class="form-group full-width">
                         <label for="tongueNotes">Additional Tongue Observations:</label>
-                        <textarea id="tongueNotes" placeholder="e.g., cracks, scalloped edges, spots, texture..." style="min-height: 80px;"></textarea>
+                        <textarea id="tongueNotes" placeholder="Note any other observations: specific crack patterns, spot locations, coating distribution, unusual features..." style="min-height: 80px;"></textarea>
                     </div>
                 </div>
 
@@ -898,8 +965,12 @@
                 symptomDetails: document.getElementById('symptomDetails').value,
                 
                 // Tongue
-                tongueColor: document.getElementById('tongueColor').value,
+                tongueBodyColor: document.getElementById('tongueBodyColor').value,
                 tongueCoating: document.getElementById('tongueCoating').value,
+                tongueTexture: document.getElementById('tongueTexture').value,
+                tongueMovement: document.getElementById('tongueMovement').value,
+                tongueTip: document.getElementById('tongueTip').value,
+                tongueSides: document.getElementById('tongueSides').value,
                 tongueNotes: document.getElementById('tongueNotes').value,
                 
                 // Left hand pulses
@@ -946,8 +1017,12 @@
             document.getElementById('secondaryType').value = '';
             document.getElementById('symptomCategories').selectedIndex = -1;
             document.getElementById('symptomDetails').value = '';
-            document.getElementById('tongueColor').value = '';
+            document.getElementById('tongueBodyColor').value = '';
             document.getElementById('tongueCoating').value = '';
+            document.getElementById('tongueTexture').value = '';
+            document.getElementById('tongueMovement').value = '';
+            document.getElementById('tongueTip').value = '';
+            document.getElementById('tongueSides').value = '';
             document.getElementById('tongueNotes').value = '';
             document.getElementById('sessionNotes').value = '';
             
@@ -1007,7 +1082,7 @@
                                 <strong>Symptoms:</strong> ${symptoms}
                             </div>
                             <div class="data-group">
-                                <strong>Tongue:</strong> ${session.tongueColor} ${session.tongueCoating}
+                                <strong>Tongue:</strong> Body: ${session.tongueBodyColor} | Coating: ${session.tongueCoating} | Texture: ${session.tongueTexture} | Movement: ${session.tongueMovement}
                             </div>
                             <div class="data-group">
                                 <strong>Key Pulses:</strong> 
