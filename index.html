@@ -249,6 +249,16 @@
             background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
         }
 
+        .btn-success {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            border-color: #27ae60;
+            color: #ffffff;
+        }
+
+        .btn-success:hover {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+        }
+
         .status-indicator {
             display: inline-block;
             width: 12px;
@@ -260,6 +270,54 @@
         .status-pending { background: #bdc3c7; }
         .status-current { background: #d4af37; }
         .status-complete { background: #27ae60; }
+
+        .save-session-container {
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(145deg, #f8f9fa, #ffffff);
+            border-radius: 12px;
+            border: 2px solid #27ae60;
+        }
+
+        .saved-sessions {
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(145deg, #f0f8ff, #ffffff);
+            border-radius: 12px;
+            border: 2px solid #3498db;
+        }
+
+        .session-card {
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .session-card h5 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-family: 'Cinzel', serif;
+        }
+
+        .session-data {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            font-size: 0.9rem;
+        }
+
+        .data-group {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 6px;
+        }
+
+        .data-group strong {
+            color: #34495e;
+        }
     </style>
 </head>
 <body>
@@ -310,7 +368,7 @@
                         <label for="constitutionalType">Primary Constitutional Type:</label>
                         <select id="constitutionalType">
                             <option value="">Select Type (if determined)</option>
-                            <option value="Wood">Wood - Liver/Gallbladder</option>
+                            <option value="Wood" selected>Wood - Liver/Gallbladder</option>
                             <option value="Fire">Fire - Heart/Small Intestine</option>
                             <option value="Earth">Earth - Spleen/Stomach</option>
                             <option value="Metal">Metal - Lung/Large Intestine</option>
@@ -738,6 +796,19 @@
                     </div>
                 </div>
 
+                <!-- Save Session Section -->
+                <div class="save-session-container">
+                    <h4 style="color: #27ae60; margin-bottom: 15px;">Save This Assessment</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sessionNotes">Session Notes:</label>
+                            <textarea id="sessionNotes" placeholder="Any additional notes about this session..." style="min-height: 80px;"></textarea>
+                        </div>
+                    </div>
+                    <button class="btn btn-success" onclick="saveSession()">💾 Save Assessment Session</button>
+                    <button class="btn btn-secondary" onclick="showSavedSessions()">📋 View Saved Sessions</button>
+                </div>
+
                 <button class="btn" onclick="completeAssessment()">Complete Assessment</button>
                 <button class="btn btn-secondary" onclick="showStep('planning')">Skip to Planning (Testing)</button>
                 <button class="btn btn-warning" onclick="showStep('treatment')">Skip to Treatment (Testing)</button>
@@ -755,8 +826,12 @@
                 <p>Live treatment tracking section - to be implemented</p>
             </div>
 
-            <div id="sessionsList">
-                <div style="text-align: center; color: #888; font-style: italic; padding: 50px;">Application framework ready - please test pulse positions</div>
+            <!-- Saved Sessions Display -->
+            <div class="saved-sessions" id="savedSessionsContainer" style="display: none;">
+                <h3 style="color: #3498db; margin-bottom: 20px; font-family: 'Cinzel', serif;">Saved Assessment Sessions</h3>
+                <div id="sessionsList"></div>
+                <button class="btn btn-warning" onclick="exportSessions()">📊 Export All Sessions</button>
+                <button class="btn btn-secondary" onclick="hideSavedSessions()">← Back to Assessment</button>
             </div>
         </div>
     </div>
@@ -769,6 +844,7 @@
         document.getElementById('sessionTime').value = timeString;
 
         let currentStep = 'assessment';
+        let savedSessions = []; // This will store all our session data
 
         function showStep(stepName) {
             document.querySelectorAll('.step-content').forEach(step => {
@@ -802,6 +878,185 @@
 
         function completeAssessment() {
             alert('Assessment completed - this will connect to the full workflow when ready');
+        }
+
+        // NEW SAVE SESSION FUNCTIONALITY
+        function saveSession() {
+            // Collect all form data
+            const sessionData = {
+                id: Date.now(), // Unique ID for this session
+                timestamp: new Date().toISOString(),
+                date: document.getElementById('sessionDate').value,
+                time: document.getElementById('sessionTime').value,
+                
+                // Constitutional type
+                constitutionalType: document.getElementById('constitutionalType').value,
+                secondaryType: document.getElementById('secondaryType').value,
+                
+                // Symptoms
+                symptomCategories: Array.from(document.getElementById('symptomCategories').selectedOptions).map(opt => opt.value),
+                symptomDetails: document.getElementById('symptomDetails').value,
+                
+                // Tongue
+                tongueColor: document.getElementById('tongueColor').value,
+                tongueCoating: document.getElementById('tongueCoating').value,
+                tongueNotes: document.getElementById('tongueNotes').value,
+                
+                // Left hand pulses
+                leftCunSuperficial: document.getElementById('leftCunSuperficial').value,
+                leftCunMiddle: document.getElementById('leftCunMiddle').value,
+                leftCunDeep: document.getElementById('leftCunDeep').value,
+                leftGuanSuperficial: document.getElementById('leftGuanSuperficial').value,
+                leftGuanMiddle: document.getElementById('leftGuanMiddle').value,
+                leftGuanDeep: document.getElementById('leftGuanDeep').value,
+                leftChiSuperficial: document.getElementById('leftChiSuperficial').value,
+                leftChiMiddle: document.getElementById('leftChiMiddle').value,
+                leftChiDeep: document.getElementById('leftChiDeep').value,
+                
+                // Right hand pulses
+                rightCunSuperficial: document.getElementById('rightCunSuperficial').value,
+                rightCunMiddle: document.getElementById('rightCunMiddle').value,
+                rightCunDeep: document.getElementById('rightCunDeep').value,
+                rightGuanSuperficial: document.getElementById('rightGuanSuperficial').value,
+                rightGuanMiddle: document.getElementById('rightGuanMiddle').value,
+                rightGuanDeep: document.getElementById('rightGuanDeep').value,
+                rightChiSuperficial: document.getElementById('rightChiSuperficial').value,
+                rightChiMiddle: document.getElementById('rightChiMiddle').value,
+                rightChiDeep: document.getElementById('rightChiDeep').value,
+                
+                // Session notes
+                sessionNotes: document.getElementById('sessionNotes').value
+            };
+
+            // Add to our sessions array
+            savedSessions.push(sessionData);
+            
+            // Show success message
+            alert(`Session saved successfully! You now have ${savedSessions.length} saved session(s).`);
+            
+            // Clear the form for next session
+            if (confirm('Clear form for next session?')) {
+                clearForm();
+            }
+        }
+
+        function clearForm() {
+            // Reset all form fields except date/time
+            document.getElementById('constitutionalType').value = 'Wood'; // Keep your constitutional type
+            document.getElementById('secondaryType').value = '';
+            document.getElementById('symptomCategories').selectedIndex = -1;
+            document.getElementById('symptomDetails').value = '';
+            document.getElementById('tongueColor').value = '';
+            document.getElementById('tongueCoating').value = '';
+            document.getElementById('tongueNotes').value = '';
+            document.getElementById('sessionNotes').value = '';
+            
+            // Clear all pulse selections
+            const pulseSelects = [
+                'leftCunSuperficial', 'leftCunMiddle', 'leftCunDeep',
+                'leftGuanSuperficial', 'leftGuanMiddle', 'leftGuanDeep', 
+                'leftChiSuperficial', 'leftChiMiddle', 'leftChiDeep',
+                'rightCunSuperficial', 'rightCunMiddle', 'rightCunDeep',
+                'rightGuanSuperficial', 'rightGuanMiddle', 'rightGuanDeep',
+                'rightChiSuperficial', 'rightChiMiddle', 'rightChiDeep'
+            ];
+            
+            pulseSelects.forEach(id => {
+                document.getElementById(id).value = '';
+            });
+            
+            // Update date/time to current
+            document.getElementById('sessionDate').valueAsDate = new Date();
+            const now = new Date();
+            const timeString = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+            document.getElementById('sessionTime').value = timeString;
+        }
+
+        function showSavedSessions() {
+            document.getElementById('assessment').style.display = 'none';
+            document.getElementById('savedSessionsContainer').style.display = 'block';
+            displaySessions();
+        }
+
+        function hideSavedSessions() {
+            document.getElementById('assessment').style.display = 'block';
+            document.getElementById('savedSessionsContainer').style.display = 'none';
+        }
+
+        function displaySessions() {
+            const sessionsList = document.getElementById('sessionsList');
+            
+            if (savedSessions.length === 0) {
+                sessionsList.innerHTML = '<p style="text-align: center; color: #888; font-style: italic;">No sessions saved yet. Complete an assessment and click "Save Assessment Session" to start tracking.</p>';
+                return;
+            }
+
+            let html = '';
+            savedSessions.reverse().forEach((session, index) => {
+                const sessionDate = new Date(session.timestamp);
+                const symptoms = session.symptomCategories.length > 0 ? session.symptomCategories.join(', ') : 'None selected';
+                
+                html += `
+                    <div class="session-card">
+                        <h5>Session ${savedSessions.length - index} - ${sessionDate.toLocaleDateString()} at ${session.time}</h5>
+                        <div class="session-data">
+                            <div class="data-group">
+                                <strong>Constitutional:</strong> ${session.constitutionalType}${session.secondaryType ? ' / ' + session.secondaryType : ''}
+                            </div>
+                            <div class="data-group">
+                                <strong>Symptoms:</strong> ${symptoms}
+                            </div>
+                            <div class="data-group">
+                                <strong>Tongue:</strong> ${session.tongueColor} ${session.tongueCoating}
+                            </div>
+                            <div class="data-group">
+                                <strong>Key Pulses:</strong> 
+                                ${session.leftGuanMiddle ? 'Liver: ' + session.leftGuanMiddle + ' | ' : ''}
+                                ${session.rightCunDeep ? 'Lung: ' + session.rightCunDeep : ''}
+                            </div>
+                        </div>
+                        ${session.sessionNotes ? '<p style="margin-top: 10px; font-style: italic;">"' + session.sessionNotes + '"</p>' : ''}
+                    </div>
+                `;
+            });
+            
+            savedSessions.reverse(); // Put back in original order
+            sessionsList.innerHTML = html;
+        }
+
+        function exportSessions() {
+            if (savedSessions.length === 0) {
+                alert('No sessions to export yet!');
+                return;
+            }
+
+            // Create CSV format for analysis
+            let csv = 'Date,Time,Constitutional Type,Secondary Type,Symptom Categories,Symptom Details,Tongue Color,Tongue Coating,Tongue Notes,';
+            csv += 'Left Cun Superficial,Left Cun Middle,Left Cun Deep,Left Guan Superficial,Left Guan Middle,Left Guan Deep,';
+            csv += 'Left Chi Superficial,Left Chi Middle,Left Chi Deep,Right Cun Superficial,Right Cun Middle,Right Cun Deep,';
+            csv += 'Right Guan Superficial,Right Guan Middle,Right Guan Deep,Right Chi Superficial,Right Chi Middle,Right Chi Deep,Session Notes\n';
+
+            savedSessions.forEach(session => {
+                csv += `"${session.date}","${session.time}","${session.constitutionalType}","${session.secondaryType}",`;
+                csv += `"${session.symptomCategories.join('; ')}","${session.symptomDetails}","${session.tongueColor}","${session.tongueCoating}","${session.tongueNotes}",`;
+                csv += `"${session.leftCunSuperficial}","${session.leftCunMiddle}","${session.leftCunDeep}",`;
+                csv += `"${session.leftGuanSuperficial}","${session.leftGuanMiddle}","${session.leftGuanDeep}",`;
+                csv += `"${session.leftChiSuperficial}","${session.leftChiMiddle}","${session.leftChiDeep}",`;
+                csv += `"${session.rightCunSuperficial}","${session.rightCunMiddle}","${session.rightCunDeep}",`;
+                csv += `"${session.rightGuanSuperficial}","${session.rightGuanMiddle}","${session.rightGuanDeep}",`;
+                csv += `"${session.rightChiSuperficial}","${session.rightChiMiddle}","${session.rightChiDeep}","${session.sessionNotes}"\n`;
+            });
+
+            // Download the file
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `acupuncture-sessions-${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            window.URL.revokeObjectURL(url);
+            
+            alert(`Exported ${savedSessions.length} sessions to CSV file for analysis!`);
         }
     </script>
 </body>
