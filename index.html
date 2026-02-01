@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acupuncture Session Tracker</title>
+    <title>Five Element Acupuncture Practice</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;500;600&display=swap');
         
@@ -318,6 +318,64 @@
         .data-group strong {
             color: #34495e;
         }
+
+        /* Point Selection Styles */
+        .point-item {
+            transition: all 0.2s ease;
+            margin-bottom: 5px;
+        }
+
+        .point-item:hover {
+            background: linear-gradient(145deg, #e3f2fd, #f0f8ff);
+            transform: translateX(5px);
+        }
+
+        .point-item div {
+            border-left: 3px solid #d4af37;
+        }
+
+        /* Treatment Log Styles */
+        .treatment-point {
+            background: linear-gradient(145deg, #f8f9fa, #ffffff);
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
+        .treatment-point-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .treatment-point-header strong {
+            color: #2c3e50;
+            font-family: 'Cinzel', serif;
+        }
+
+        .treatment-details {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .detail-group {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .detail-group label {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 3px;
+        }
+
+        .detail-group select {
+            padding: 8px 10px;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
@@ -355,6 +413,10 @@
                 <div class="step-indicator" data-step="treatment">
                     <span class="status-indicator status-pending"></span>
                     III. Live Treatment
+                </div>
+                <div class="step-indicator" data-step="review">
+                    <span class="status-indicator status-pending"></span>
+                    IV. Session Review
                 </div>
             </div>
 
@@ -872,25 +934,170 @@
                             <textarea id="sessionNotes" placeholder="Any additional notes about this session..." style="min-height: 80px;"></textarea>
                         </div>
                     </div>
-                    <button class="btn btn-success" onclick="saveSession()">💾 Save Assessment Session</button>
+                    <button class="btn btn-success" onclick="saveAssessmentSession()">💾 Save Assessment Session</button>
                     <button class="btn btn-secondary" onclick="showSavedSessions()">📋 View Saved Sessions</button>
                 </div>
 
-                <button class="btn" onclick="completeAssessment()">Complete Assessment</button>
-                <button class="btn btn-secondary" onclick="showStep('planning')">Skip to Planning (Testing)</button>
-                <button class="btn btn-warning" onclick="showStep('treatment')">Skip to Treatment (Testing)</button>
+                <button class="btn" onclick="completeAssessment()">Complete Assessment →</button>
             </div>
 
             <!-- Step 2: Treatment Planning -->
             <div class="step-content" id="planning">
                 <h3>II. Treatment Planning</h3>
-                <p>Treatment planning section - to be implemented</p>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="causativeFactor">Causative Factor (CF):</label>
+                        <select id="causativeFactor">
+                            <option value="">Determine from Assessment</option>
+                            <option value="Wood">Wood (Liver/Gallbladder)</option>
+                            <option value="Fire">Fire (Heart/Small Intestine)</option>
+                            <option value="Earth">Earth (Spleen/Stomach)</option>
+                            <option value="Metal">Metal (Lung/Large Intestine)</option>
+                            <option value="Water">Water (Kidney/Bladder)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="treatmentStrategy">Treatment Strategy:</label>
+                        <select id="treatmentStrategy">
+                            <option value="">Select Strategy</option>
+                            <option value="Tonify CF">Tonify Causative Factor</option>
+                            <option value="Sedate CF">Sedate Causative Factor</option>
+                            <option value="Tonify Mother">Tonify Mother Element</option>
+                            <option value="Sedate Child">Sedate Child Element</option>
+                            <option value="Harmonize Ke Cycle">Harmonize Controlling Cycle</option>
+                            <option value="Drain Aggressive Energy">Drain Aggressive Energy</option>
+                            <option value="Entry-Exit Block">Clear Entry-Exit Block</option>
+                        </select>
+                    </div>
+                </div>
+
+                <h4>Point Selection</h4>
+                
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label for="pointSearch">Search Points (by name, element, or spirit):</label>
+                        <input type="text" id="pointSearch" placeholder="Search 'Gate of Hope', 'Metal', 'Source Point'..." onkeyup="searchPoints()">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group" style="flex: 2;">
+                        <label>Available Points:</label>
+                        <div id="pointList" style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; border-radius: 8px; padding: 10px; background: #fefefe;">
+                            <!-- Points will be dynamically inserted here -->
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" style="flex: 1;">
+                        <label>Selected Points:</label>
+                        <div id="selectedPoints" style="min-height: 200px; border: 2px solid #d4af37; border-radius: 8px; padding: 15px; background: #fefefe;">
+                            <p style="color: #888; font-style: italic; text-align: center;">No points selected yet</p>
+                        </div>
+                        <button class="btn btn-warning" onclick="clearSelectedPoints()" style="margin-top: 10px; width: 100%;">Clear Selection</button>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label for="treatmentRationale">Treatment Rationale:</label>
+                        <textarea id="treatmentRationale" placeholder="Explain why these points were chosen based on the assessment..." style="min-height: 100px;"></textarea>
+                    </div>
+                </div>
+
+                <button class="btn" onclick="saveTreatmentPlan()">💾 Save Treatment Plan</button>
+                <button class="btn btn-success" onclick="showStep('treatment')">Proceed to Live Treatment →</button>
             </div>
 
             <!-- Step 3: Live Treatment -->
             <div class="step-content" id="treatment">
                 <h3>III. Live Treatment</h3>
-                <p>Live treatment tracking section - to be implemented</p>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="needleSize">Needle Size:</label>
+                        <select id="needleSize">
+                            <option value="0.16x15mm">0.16 × 15mm</option>
+                            <option value="0.18x25mm">0.18 × 25mm</option>
+                            <option value="0.20x30mm" selected>0.20 × 30mm</option>
+                            <option value="0.25x40mm">0.25 × 40mm</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="needleDepth">Average Depth:</label>
+                        <select id="needleDepth">
+                            <option value="Superficial">Superficial (2-5mm)</option>
+                            <option value="Medium" selected>Medium (10-15mm)</option>
+                            <option value="Deep">Deep (20-30mm)</option>
+                            <option value="Variable">Variable</option>
+                        </select>
+                    </div>
+                </div>
+
+                <h4>Point-by-Point Treatment Log</h4>
+                
+                <div id="treatmentLog" style="margin-bottom: 30px;">
+                    <!-- Points from treatment plan will appear here -->
+                    <p style="color: #888; font-style: italic; text-align: center; padding: 20px;">
+                        Points will appear here after you save a treatment plan.
+                    </p>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label for="patientResponse">Patient's Immediate Response:</label>
+                        <textarea id="patientResponse" placeholder="Note any immediate reactions: deqi sensation, emotional release, color changes, etc." style="min-height: 100px;"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label for="homework">Homework/Recommendations:</label>
+                        <textarea id="homework" placeholder="Self-care, dietary suggestions, mindfulness practices, element-specific activities..." style="min-height: 80px;"></textarea>
+                    </div>
+                </div>
+
+                <button class="btn btn-success" onclick="completeTreatment()">Complete Treatment Session →</button>
+            </div>
+
+            <!-- Step 4: Session Review -->
+            <div class="step-content" id="review">
+                <h3>IV. Session Review</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="sessionRating">Overall Session Quality:</label>
+                        <select id="sessionRating">
+                            <option value="">Select Rating</option>
+                            <option value="Exceptional">Exceptional - Major shifts</option>
+                            <option value="Good">Good - Clear improvement</option>
+                            <option value="Moderate">Moderate - Some changes</option>
+                            <option value="Subtle">Subtle - Minor shifts</option>
+                            <option value="Neutral">Neutral - No clear changes</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nextSession">Recommended Next Session:</label>
+                        <input type="date" id="nextSession">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label for="practitionerReflections">Practitioner Reflections:</label>
+                        <textarea id="practitionerReflections" placeholder="What worked well? What would you do differently? Insights about the patient's journey..." style="min-height: 120px;"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label for="patientFeedback">Patient Feedback (to be added after session):</label>
+                        <textarea id="patientFeedback" placeholder="Patient can add their experience, dreams, insights over the next few days..." style="min-height: 100px;"></textarea>
+                    </div>
+                </div>
+
+                <button class="btn btn-success" onclick="saveCompleteSession()">💾 Save Complete Session</button>
+                <button class="btn" onclick="showStep('assessment')">Start New Session</button>
             </div>
 
             <!-- Saved Sessions Display -->
@@ -904,15 +1111,190 @@
     </div>
 
     <script>
-        // Initialize
+        // ========== INITIALIZATION ==========
         document.getElementById('sessionDate').valueAsDate = new Date();
         const now = new Date();
         const timeString = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
         document.getElementById('sessionTime').value = timeString;
 
         let currentStep = 'assessment';
-        let savedSessions = []; // This will store all our session data
+        let savedSessions = [];
+        let selectedPoints = []; // For treatment planning
+        let currentTreatmentPlan = null;
 
+        // ========== FIVE ELEMENT POINTS DATASET ==========
+        const fiveElementPoints = [
+            {
+                id: "LU9",
+                code: "LU9",
+                pinyin: "Taiyuan",
+                englishName: "Great Abyss",
+                spiritualName: "Supreme Source",
+                meridian: "Lung",
+                element: "Metal",
+                pointType: "Source Point, Shu-Stream (Earth), Horary Point",
+                resonance: "Where ancestral Qi gathers. Influences grief, letting go, and inspiration.",
+                commonUse: "Tonify Lung Qi and Yin. Connect to ancestral energy."
+            },
+            {
+                id: "LI4",
+                code: "LI4",
+                pinyin: "Hegu",
+                englishName: "Union Valley",
+                spiritualName: "Great Eliminator",
+                meridian: "Large Intestine",
+                element: "Metal",
+                pointType: "Source Point",
+                resonance: "Releases what is stuck. Eliminates toxins (physical & emotional).",
+                commonUse: "Release grief, pain, stagnation. Famous 'Four Gates' with LV3."
+            },
+            {
+                id: "ST25",
+                code: "ST25",
+                pinyin: "Tianshu",
+                englishName: "Celestial Pivot",
+                spiritualName: "Gate of Hope",
+                meridian: "Stomach",
+                element: "Earth",
+                pointType: "Front-Mu Point of Large Intestine",
+                resonance: "The pivot between heaven and earth in the abdomen. Where hope enters.",
+                commonUse: "Transform worry, receive nourishment, digestive issues."
+            },
+            {
+                id: "SP3",
+                code: "SP3",
+                pinyin: "Taibai",
+                englishName: "Supreme White",
+                spiritualName: "Great Clarity",
+                meridian: "Spleen",
+                element: "Earth",
+                pointType: "Source Point, Shu-Stream (Earth)",
+                resonance: "Brings clarity from overwhelm. Grounds scattered energy.",
+                commonUse: "Tonify Spleen, resolve worry, improve concentration."
+            },
+            {
+                id: "HT7",
+                code: "HT7",
+                pinyin: "Shenmen",
+                englishName: "Spirit Gate",
+                spiritualName: "Gate of the Shen",
+                meridian: "Heart",
+                element: "Fire",
+                pointType: "Source Point, Shu-Stream (Earth)",
+                resonance: "The gatekeeper of the Spirit (Shen). Calms agitation.",
+                commonUse: "Calm anxiety, insomnia, emotional turmoil. Connect to joy."
+            },
+            {
+                id: "SI3",
+                code: "SI3",
+                pinyin: "Houxi",
+                englishName: "Back Stream",
+                spiritualName: "Rear Ravine",
+                meridian: "Small Intestine",
+                element: "Fire",
+                pointType: "Shu-Stream (Wood), Command Point",
+                resonance: "Sorts pure from impure (physically & emotionally).",
+                commonUse: "Clarity, decision-making, neck/shoulder tension."
+            },
+            {
+                id: "BL67",
+                code: "BL67",
+                pinyin: "Zhiyin",
+                englishName: "Reach Yin",
+                spiritualName: "Ultimate Yin",
+                meridian: "Bladder",
+                element: "Water",
+                pointType: "Jing-Well (Metal)",
+                resonance: "Connects to deepest reserves. Access willpower (Zhi).",
+                commonUse: "Turn breech babies, access courage, fear issues."
+            },
+            {
+                id: "KI3",
+                code: "KI3",
+                pinyin: "Taixi",
+                englishName: "Great Stream",
+                spiritualName: "Supreme Ravine",
+                meridian: "Kidney",
+                element: "Water",
+                pointType: "Source Point, Shu-Stream (Earth)",
+                resonance: "The great stream of ancestral essence (Jing).",
+                commonUse: "Tonify Kidney Yin & Yang. Low back, fear, willpower."
+            },
+            {
+                id: "PC6",
+                code: "PC6",
+                pinyin: "Neiguan",
+                englishName: "Inner Pass",
+                spiritualName: "Inner Frontier Gate",
+                meridian: "Pericardium",
+                element: "Fire",
+                pointType: "Luo-Connecting Point",
+                resonance: "Protects the Heart. What we let in/keep out emotionally.",
+                commonUse: "Calm Shen, nausea, chest tightness, emotional protection."
+            },
+            {
+                id: "TE5",
+                code: "TE5",
+                pinyin: "Waiguan",
+                englishName: "Outer Pass",
+                spiritualName: "Outer Frontier Gate",
+                meridian: "Triple Warmer",
+                element: "Fire",
+                pointType: "Luo-Connecting Point",
+                resonance: "Regulates boundaries with the external world.",
+                commonUse: "Fever, external pathogens, shoulder pain, relationship boundaries."
+            },
+            {
+                id: "GB34",
+                code: "GB34",
+                pinyin: "Yanglingquan",
+                englishName: "Yang Mound Spring",
+                spiritualName: "Sunlit Plateau Spring",
+                meridian: "Gallbladder",
+                element: "Wood",
+                pointType: "He-Sea (Earth), Influential Point for Sinews",
+                resonance: "Spring of decisive action from planning.",
+                commonUse: "Sinew pain, decision-making, courage to act."
+            },
+            {
+                id: "LV3",
+                code: "LV3",
+                pinyin: "Taichong",
+                englishName: "Great Surge",
+                spiritualName: "Supreme Rushing",
+                meridian: "Liver",
+                element: "Wood",
+                pointType: "Source Point, Shu-Stream (Earth)",
+                resonance: "The great surge of Qi. Regulates smooth flow of emotions.",
+                commonUse: "Move stagnant Qi (anger, frustration), headache, 'Four Gates'."
+            },
+            {
+                id: "GV20",
+                code: "GV20",
+                pinyin: "Baihui",
+                englishName: "Hundred Convergences",
+                spiritualName: "Meeting of Heaven",
+                meridian: "Governing Vessel",
+                element: "N/A (Yang)",
+                pointType: "Sea of Marrow Point",
+                resonance: "Where all Yang channels meet. Connects to heaven/inspiration.",
+                commonUse: "Lift Yang, clear mind, depression, spiritual connection."
+            },
+            {
+                id: "CV17",
+                code: "CV17",
+                pinyin: "Shanzhong",
+                englishName: "Chest Center",
+                spiritualName: "Sea of Tranquility",
+                meridian: "Conception Vessel",
+                element: "N/A (Yin)",
+                pointType: "Influential Point for Qi, Front-Mu of Pericardium",
+                resonance: "The gathering place of Qi in the chest. Calms the emotional sea.",
+                commonUse: "Regulate Qi, calm Shen, chest tightness, grief."
+            }
+        ];
+
+        // ========== WORKFLOW NAVIGATION ==========
         function showStep(stepName) {
             document.querySelectorAll('.step-content').forEach(step => {
                 step.classList.remove('active');
@@ -934,6 +1316,16 @@
             });
             
             currentStep = stepName;
+            
+            // Initialize point list when showing planning step
+            if (stepName === 'planning') {
+                initializePointList();
+            }
+            
+            // Initialize treatment log when showing treatment step
+            if (stepName === 'treatment' && currentTreatmentPlan) {
+                initializeTreatmentLog();
+            }
         }
 
         document.querySelectorAll('.step-indicator').forEach(indicator => {
@@ -943,28 +1335,24 @@
             });
         });
 
+        // ========== ASSESSMENT FUNCTIONS ==========
         function completeAssessment() {
-            alert('Assessment completed - this will connect to the full workflow when ready');
+            showStep('planning');
         }
 
-        // NEW SAVE SESSION FUNCTIONALITY
-        function saveSession() {
-            // Collect all form data
+        function saveAssessmentSession() {
             const sessionData = {
-                id: Date.now(), // Unique ID for this session
+                id: Date.now(),
                 timestamp: new Date().toISOString(),
                 date: document.getElementById('sessionDate').value,
                 time: document.getElementById('sessionTime').value,
                 
-                // Constitutional type
                 constitutionalType: document.getElementById('constitutionalType').value,
                 secondaryType: document.getElementById('secondaryType').value,
                 
-                // Symptoms
                 symptomCategories: Array.from(document.getElementById('symptomCategories').selectedOptions).map(opt => opt.value),
                 symptomDetails: document.getElementById('symptomDetails').value,
                 
-                // Tongue
                 tongueBodyColor: document.getElementById('tongueBodyColor').value,
                 tongueCoating: document.getElementById('tongueCoating').value,
                 tongueTexture: document.getElementById('tongueTexture').value,
@@ -973,7 +1361,6 @@
                 tongueSides: document.getElementById('tongueSides').value,
                 tongueNotes: document.getElementById('tongueNotes').value,
                 
-                // Left hand pulses
                 leftCunSuperficial: document.getElementById('leftCunSuperficial').value,
                 leftCunMiddle: document.getElementById('leftCunMiddle').value,
                 leftCunDeep: document.getElementById('leftCunDeep').value,
@@ -984,7 +1371,6 @@
                 leftChiMiddle: document.getElementById('leftChiMiddle').value,
                 leftChiDeep: document.getElementById('leftChiDeep').value,
                 
-                // Right hand pulses
                 rightCunSuperficial: document.getElementById('rightCunSuperficial').value,
                 rightCunMiddle: document.getElementById('rightCunMiddle').value,
                 rightCunDeep: document.getElementById('rightCunDeep').value,
@@ -995,25 +1381,347 @@
                 rightChiMiddle: document.getElementById('rightChiMiddle').value,
                 rightChiDeep: document.getElementById('rightChiDeep').value,
                 
-                // Session notes
                 sessionNotes: document.getElementById('sessionNotes').value
             };
 
-            // Add to our sessions array
             savedSessions.push(sessionData);
             
-            // Show success message
-            alert(`Session saved successfully! You now have ${savedSessions.length} saved session(s).`);
+            alert(`Assessment saved successfully! You now have ${savedSessions.length} saved session(s).`);
             
-            // Clear the form for next session
             if (confirm('Clear form for next session?')) {
                 clearForm();
             }
         }
 
+        // ========== TREATMENT PLANNING FUNCTIONS ==========
+        function initializePointList() {
+            const pointList = document.getElementById('pointList');
+            pointList.innerHTML = '';
+            
+            fiveElementPoints.forEach(point => {
+                const pointDiv = document.createElement('div');
+                pointDiv.className = 'point-item';
+                pointDiv.innerHTML = `
+                    <div style="padding: 10px; border-bottom: 1px solid #eee; cursor: pointer;">
+                        <strong>${point.spiritualName}</strong> (${point.code})<br>
+                        <small style="color: #666;">${point.meridian} • ${point.element} • ${point.pointType}</small><br>
+                        <small>${point.resonance.substring(0, 80)}...</small>
+                    </div>
+                `;
+                pointDiv.onclick = () => selectPoint(point);
+                pointList.appendChild(pointDiv);
+            });
+        }
+
+        function selectPoint(point) {
+            if (!selectedPoints.find(p => p.id === point.id)) {
+                selectedPoints.push(point);
+                updateSelectedPointsDisplay();
+            }
+        }
+
+        function updateSelectedPointsDisplay() {
+            const container = document.getElementById('selectedPoints');
+            
+            if (selectedPoints.length === 0) {
+                container.innerHTML = '<p style="color: #888; font-style: italic; text-align: center;">No points selected yet</p>';
+                return;
+            }
+            
+            let html = '<div style="display: flex; flex-wrap: wrap; gap: 10px;">';
+            selectedPoints.forEach(point => {
+                html += `
+                    <div style="background: linear-gradient(145deg, #f8f9fa, #ffffff); 
+                                border: 1px solid #d4af37; 
+                                border-radius: 6px; 
+                                padding: 8px 12px; 
+                                flex: 1; 
+                                min-width: 200px;">
+                        <strong>${point.spiritualName}</strong><br>
+                        <small>${point.code} • ${point.element}</small>
+                        <button onclick="removePoint('${point.id}')" 
+                                style="float: right; background: #e74c3c; color: white; border: none; border-radius: 4px; padding: 2px 8px; cursor: pointer;">
+                            ×
+                        </button>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        function removePoint(pointId) {
+            selectedPoints = selectedPoints.filter(p => p.id !== pointId);
+            updateSelectedPointsDisplay();
+        }
+
+        function clearSelectedPoints() {
+            selectedPoints = [];
+            updateSelectedPointsDisplay();
+        }
+
+        function searchPoints() {
+            const searchTerm = document.getElementById('pointSearch').value.toLowerCase();
+            const pointItems = document.querySelectorAll('.point-item');
+            
+            pointItems.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(searchTerm) ? 'block' : 'none';
+            });
+        }
+
+        function saveTreatmentPlan() {
+            if (selectedPoints.length === 0) {
+                alert('Please select at least one point for the treatment plan.');
+                return;
+            }
+
+            currentTreatmentPlan = {
+                causativeFactor: document.getElementById('causativeFactor').value,
+                strategy: document.getElementById('treatmentStrategy').value,
+                selectedPoints: selectedPoints.map(p => ({
+                    id: p.id,
+                    code: p.code,
+                    spiritualName: p.spiritualName,
+                    element: p.element,
+                    meridian: p.meridian,
+                    resonance: p.resonance
+                })),
+                rationale: document.getElementById('treatmentRationale').value
+            };
+            
+            alert(`Treatment plan saved with ${selectedPoints.length} points.`);
+            showStep('treatment');
+        }
+
+        // ========== LIVE TREATMENT FUNCTIONS ==========
+        function initializeTreatmentLog() {
+            const treatmentLog = document.getElementById('treatmentLog');
+            
+            if (!currentTreatmentPlan || !currentTreatmentPlan.selectedPoints) {
+                treatmentLog.innerHTML = '<p style="color: #888; font-style: italic; text-align: center; padding: 20px;">No treatment plan saved yet.</p>';
+                return;
+            }
+            
+            let html = '';
+            currentTreatmentPlan.selectedPoints.forEach((point, index) => {
+                html += `
+                    <div class="treatment-point" id="treatmentPoint${index}">
+                        <div class="treatment-point-header">
+                            <strong>${point.spiritualName}</strong> (${point.code})
+                            <small style="color: #666;">${point.meridian} • ${point.element}</small>
+                        </div>
+                        <div class="treatment-details">
+                            <div class="detail-group">
+                                <label>Needle Sensation (Deqi):</label>
+                                <select id="sensation${index}">
+                                    <option value="">Select</option>
+                                    <option value="Strong">Strong - Clear arrival of Qi</option>
+                                    <option value="Moderate">Moderate - Good connection</option>
+                                    <option value="Mild">Mild - Subtle sensation</option>
+                                    <option value="None">None - No sensation</option>
+                                    <option value="Painful">Painful - Uncomfortable</option>
+                                </select>
+                            </div>
+                            <div class="detail-group">
+                                <label>Needle Depth:</label>
+                                <select id="depth${index}">
+                                    <option value="">Select</option>
+                                    <option value="Superficial">Superficial (2-5mm)</option>
+                                    <option value="Medium">Medium (10-15mm)</option>
+                                    <option value="Deep">Deep (20-30mm)</option>
+                                </select>
+                            </div>
+                            <div class="detail-group">
+                                <label>Manipulation:</label>
+                                <select id="manipulation${index}">
+                                    <option value="">Select</option>
+                                    <option value="Tonify">Tonify (clockwise)</option>
+                                    <option value="Sedate">Sedate (counter-clockwise)</option>
+                                    <option value="Even">Even (no manipulation)</option>
+                                    <option value="Peking">Peking Technique</option>
+                                    <option value="Tonify-Sedate">Tonify then Sedate</option>
+                                </select>
+                            </div>
+                            <div class="detail-group">
+                                <label>Retention Time:</label>
+                                <select id="retention${index}">
+                                    <option value="">Select</option>
+                                    <option value="5">5 minutes</option>
+                                    <option value="10">10 minutes</option>
+                                    <option value="15">15 minutes</option>
+                                    <option value="20">20 minutes</option>
+                                    <option value="25">25 minutes</option>
+                                    <option value="30">30+ minutes</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div style="margin-top: 10px;">
+                            <label style="font-size: 0.8rem; color: #666;">Notes for this point:</label>
+                            <input type="text" id="pointNotes${index}" placeholder="Any specific observations..." style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                        </div>
+                    </div>
+                `;
+            });
+            
+            treatmentLog.innerHTML = html;
+        }
+
+        function completeTreatment() {
+            if (!currentTreatmentPlan) {
+                alert('Please save a treatment plan first.');
+                return;
+            }
+
+            // Collect treatment details
+            const treatmentDetails = {
+                needleSize: document.getElementById('needleSize').value,
+                needleDepth: document.getElementById('needleDepth').value,
+                patientResponse: document.getElementById('patientResponse').value,
+                homework: document.getElementById('homework').value,
+                pointDetails: []
+            };
+
+            // Collect point-by-point details
+            currentTreatmentPlan.selectedPoints.forEach((point, index) => {
+                treatmentDetails.pointDetails.push({
+                    pointId: point.id,
+                    pointName: point.spiritualName,
+                    sensation: document.getElementById(`sensation${index}`)?.value || '',
+                    depth: document.getElementById(`depth${index}`)?.value || '',
+                    manipulation: document.getElementById(`manipulation${index}`)?.value || '',
+                    retention: document.getElementById(`retention${index}`)?.value || '',
+                    notes: document.getElementById(`pointNotes${index}`)?.value || ''
+                });
+            });
+
+            // Save to session data
+            if (savedSessions.length > 0) {
+                const lastSession = savedSessions[savedSessions.length - 1];
+                lastSession.treatmentPlan = currentTreatmentPlan;
+                lastSession.treatmentDetails = treatmentDetails;
+            }
+
+            alert('Treatment session completed!');
+            showStep('review');
+        }
+
+        // ========== SESSION REVIEW FUNCTIONS ==========
+        function saveCompleteSession() {
+            const completeSession = {
+                rating: document.getElementById('sessionRating').value,
+                nextSession: document.getElementById('nextSession').value,
+                practitionerReflections: document.getElementById('practitionerReflections').value,
+                patientFeedback: document.getElementById('patientFeedback').value
+            };
+
+            if (savedSessions.length > 0) {
+                const lastSession = savedSessions[savedSessions.length - 1];
+                lastSession.completeSession = completeSession;
+                lastSession.completed = true;
+                lastSession.completionDate = new Date().toISOString();
+            }
+
+            alert('Complete session saved! The healing journey continues...');
+            
+            // Option to start new session
+            if (confirm('Would you like to start a new session?')) {
+                clearForm();
+                showStep('assessment');
+            }
+        }
+
+        // ========== SAVED SESSIONS FUNCTIONS ==========
+        function showSavedSessions() {
+            document.getElementById('assessment').style.display = 'none';
+            document.getElementById('planning').style.display = 'none';
+            document.getElementById('treatment').style.display = 'none';
+            document.getElementById('review').style.display = 'none';
+            document.getElementById('savedSessionsContainer').style.display = 'block';
+            displaySessions();
+        }
+
+        function hideSavedSessions() {
+            document.getElementById('assessment').style.display = 'block';
+            document.getElementById('planning').style.display = 'none';
+            document.getElementById('treatment').style.display = 'none';
+            document.getElementById('review').style.display = 'none';
+            document.getElementById('savedSessionsContainer').style.display = 'none';
+        }
+
+        function displaySessions() {
+            const sessionsList = document.getElementById('sessionsList');
+            
+            if (savedSessions.length === 0) {
+                sessionsList.innerHTML = '<p style="text-align: center; color: #888; font-style: italic;">No sessions saved yet.</p>';
+                return;
+            }
+
+            let html = '';
+            savedSessions.reverse().forEach((session, index) => {
+                const sessionDate = new Date(session.timestamp);
+                const symptoms = session.symptomCategories && session.symptomCategories.length > 0 ? 
+                    session.symptomCategories.join(', ') : 'None selected';
+                
+                html += `
+                    <div class="session-card">
+                        <h5>Session ${savedSessions.length - index} - ${sessionDate.toLocaleDateString()} at ${session.time}</h5>
+                        <div class="session-data">
+                            <div class="data-group">
+                                <strong>Constitutional:</strong> ${session.constitutionalType}${session.secondaryType ? ' / ' + session.secondaryType : ''}
+                            </div>
+                            <div class="data-group">
+                                <strong>Symptoms:</strong> ${symptoms}
+                            </div>
+                            <div class="data-group">
+                                <strong>Tongue:</strong> Body: ${session.tongueBodyColor} | Coating: ${session.tongueCoating}
+                            </div>
+                            <div class="data-group">
+                                <strong>Treatment:</strong> ${session.treatmentPlan ? session.treatmentPlan.selectedPoints.length + ' points' : 'Not planned'}
+                            </div>
+                        </div>
+                        ${session.sessionNotes ? '<p style="margin-top: 10px; font-style: italic;">"' + session.sessionNotes + '"</p>' : ''}
+                    </div>
+                `;
+            });
+            
+            savedSessions.reverse();
+            sessionsList.innerHTML = html;
+        }
+
+        function exportSessions() {
+            if (savedSessions.length === 0) {
+                alert('No sessions to export yet!');
+                return;
+            }
+
+            let csv = 'Date,Time,Constitutional Type,Secondary Type,Symptom Categories,Tongue Color,Tongue Coating,';
+            csv += 'Treatment Points,Strategy,Patient Response,Rating\n';
+
+            savedSessions.forEach(session => {
+                const points = session.treatmentPlan ? 
+                    session.treatmentPlan.selectedPoints.map(p => p.spiritualName).join('; ') : 'None';
+                csv += `"${session.date}","${session.time}","${session.constitutionalType}","${session.secondaryType}",`;
+                csv += `"${session.symptomCategories ? session.symptomCategories.join('; ') : ''}","${session.tongueBodyColor}","${session.tongueCoating}",`;
+                csv += `"${points}","${session.treatmentPlan ? session.treatmentPlan.strategy : ''}",`;
+                csv += `"${session.treatmentDetails ? session.treatmentDetails.patientResponse : ''}",`;
+                csv += `"${session.completeSession ? session.completeSession.rating : ''}"\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `five-element-sessions-${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            window.URL.revokeObjectURL(url);
+            
+            alert(`Exported ${savedSessions.length} sessions to CSV file!`);
+        }
+
+        // ========== UTILITY FUNCTIONS ==========
         function clearForm() {
-            // Reset all form fields except date/time
-            document.getElementById('constitutionalType').value = 'Wood'; // Keep your constitutional type
+            document.getElementById('constitutionalType').value = 'Wood';
             document.getElementById('secondaryType').value = '';
             document.getElementById('symptomCategories').selectedIndex = -1;
             document.getElementById('symptomDetails').value = '';
@@ -1026,7 +1734,6 @@
             document.getElementById('tongueNotes').value = '';
             document.getElementById('sessionNotes').value = '';
             
-            // Clear all pulse selections
             const pulseSelects = [
                 'leftCunSuperficial', 'leftCunMiddle', 'leftCunDeep',
                 'leftGuanSuperficial', 'leftGuanMiddle', 'leftGuanDeep', 
@@ -1040,98 +1747,13 @@
                 document.getElementById(id).value = '';
             });
             
-            // Update date/time to current
             document.getElementById('sessionDate').valueAsDate = new Date();
             const now = new Date();
             const timeString = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
             document.getElementById('sessionTime').value = timeString;
-        }
-
-        function showSavedSessions() {
-            document.getElementById('assessment').style.display = 'none';
-            document.getElementById('savedSessionsContainer').style.display = 'block';
-            displaySessions();
-        }
-
-        function hideSavedSessions() {
-            document.getElementById('assessment').style.display = 'block';
-            document.getElementById('savedSessionsContainer').style.display = 'none';
-        }
-
-        function displaySessions() {
-            const sessionsList = document.getElementById('sessionsList');
             
-            if (savedSessions.length === 0) {
-                sessionsList.innerHTML = '<p style="text-align: center; color: #888; font-style: italic;">No sessions saved yet. Complete an assessment and click "Save Assessment Session" to start tracking.</p>';
-                return;
-            }
-
-            let html = '';
-            savedSessions.reverse().forEach((session, index) => {
-                const sessionDate = new Date(session.timestamp);
-                const symptoms = session.symptomCategories.length > 0 ? session.symptomCategories.join(', ') : 'None selected';
-                
-                html += `
-                    <div class="session-card">
-                        <h5>Session ${savedSessions.length - index} - ${sessionDate.toLocaleDateString()} at ${session.time}</h5>
-                        <div class="session-data">
-                            <div class="data-group">
-                                <strong>Constitutional:</strong> ${session.constitutionalType}${session.secondaryType ? ' / ' + session.secondaryType : ''}
-                            </div>
-                            <div class="data-group">
-                                <strong>Symptoms:</strong> ${symptoms}
-                            </div>
-                            <div class="data-group">
-                                <strong>Tongue:</strong> Body: ${session.tongueBodyColor} | Coating: ${session.tongueCoating} | Texture: ${session.tongueTexture} | Movement: ${session.tongueMovement}
-                            </div>
-                            <div class="data-group">
-                                <strong>Key Pulses:</strong> 
-                                ${session.leftGuanMiddle ? 'Liver: ' + session.leftGuanMiddle + ' | ' : ''}
-                                ${session.rightCunDeep ? 'Lung: ' + session.rightCunDeep : ''}
-                            </div>
-                        </div>
-                        ${session.sessionNotes ? '<p style="margin-top: 10px; font-style: italic;">"' + session.sessionNotes + '"</p>' : ''}
-                    </div>
-                `;
-            });
-            
-            savedSessions.reverse(); // Put back in original order
-            sessionsList.innerHTML = html;
-        }
-
-        function exportSessions() {
-            if (savedSessions.length === 0) {
-                alert('No sessions to export yet!');
-                return;
-            }
-
-            // Create CSV format for analysis
-            let csv = 'Date,Time,Constitutional Type,Secondary Type,Symptom Categories,Symptom Details,Tongue Color,Tongue Coating,Tongue Notes,';
-            csv += 'Left Cun Superficial,Left Cun Middle,Left Cun Deep,Left Guan Superficial,Left Guan Middle,Left Guan Deep,';
-            csv += 'Left Chi Superficial,Left Chi Middle,Left Chi Deep,Right Cun Superficial,Right Cun Middle,Right Cun Deep,';
-            csv += 'Right Guan Superficial,Right Guan Middle,Right Guan Deep,Right Chi Superficial,Right Chi Middle,Right Chi Deep,Session Notes\n';
-
-            savedSessions.forEach(session => {
-                csv += `"${session.date}","${session.time}","${session.constitutionalType}","${session.secondaryType}",`;
-                csv += `"${session.symptomCategories.join('; ')}","${session.symptomDetails}","${session.tongueColor}","${session.tongueCoating}","${session.tongueNotes}",`;
-                csv += `"${session.leftCunSuperficial}","${session.leftCunMiddle}","${session.leftCunDeep}",`;
-                csv += `"${session.leftGuanSuperficial}","${session.leftGuanMiddle}","${session.leftGuanDeep}",`;
-                csv += `"${session.leftChiSuperficial}","${session.leftChiMiddle}","${session.leftChiDeep}",`;
-                csv += `"${session.rightCunSuperficial}","${session.rightCunMiddle}","${session.rightCunDeep}",`;
-                csv += `"${session.rightGuanSuperficial}","${session.rightGuanMiddle}","${session.rightGuanDeep}",`;
-                csv += `"${session.rightChiSuperficial}","${session.rightChiMiddle}","${session.rightChiDeep}","${session.sessionNotes}"\n`;
-            });
-
-            // Download the file
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `acupuncture-sessions-${new Date().toISOString().split('T')[0]}.csv`;
-            a.click();
-            window.URL.revokeObjectURL(url);
-            
-            alert(`Exported ${savedSessions.length} sessions to CSV file for analysis!`);
+            selectedPoints = [];
+            currentTreatmentPlan = null;
         }
     </script>
 </body>
