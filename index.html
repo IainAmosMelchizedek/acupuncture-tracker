@@ -626,7 +626,6 @@
                         </div>
                     </div>
                     <button class="btn btn-success" onclick="saveAssessmentSession()">💾 Save Assessment Session</button>
-                    <button class="btn btn-secondary" onclick="showSavedSessions()">📋 View Saved Sessions</button>
                 </div>
 
                 <button class="btn" onclick="completeAssessment()">Complete Assessment →</button>
@@ -1020,6 +1019,58 @@
         function exportSessions() {
             if (savedSessions.length === 0) { alert('No sessions to export yet!'); return; }
 
+            if (savedSessions.length === 1) {
+                runExport([0]);
+                return;
+            }
+
+            // Build selection dialog
+            let options = savedSessions.map((s, i) =>
+                `<label style="display:block;margin:8px 0;font-family:'Crimson Text',serif;font-size:1rem;">
+                    <input type="checkbox" value="${i}" style="margin-right:8px;width:auto;">
+                    Session ${i+1} — ${s.date} at ${s.time} (${s.constitutionalType || 'No type'})
+                </label>`
+            ).join('');
+
+            const overlay = document.createElement('div');
+            overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999;display:flex;align-items:center;justify-content:center;';
+            overlay.innerHTML = `
+                <div style="background:#fff;border:2px solid #d4af37;border-radius:12px;padding:30px;max-width:500px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+                    <h4 style="font-family:'Cinzel',serif;color:#2c3e50;margin-bottom:15px;border-bottom:2px solid #d4af37;padding-bottom:10px;">Select Sessions to Export</h4>
+                    <div style="margin-bottom:15px;">
+                        <label style="display:block;margin:8px 0;font-family:'Crimson Text',serif;font-size:1rem;font-weight:bold;">
+                            <input type="checkbox" id="selectAllSessions" style="margin-right:8px;width:auto;" onchange="toggleAllSessions(this)">
+                            Export All Sessions
+                        </label>
+                        <hr style="border-color:#eee;margin:10px 0;">
+                        <div id="sessionCheckboxes">${options}</div>
+                    </div>
+                    <div style="display:flex;gap:10px;margin-top:20px;">
+                        <button onclick="confirmExport()" style="flex:1;background:linear-gradient(135deg,#2c3e50,#34495e);color:#d4af37;border:2px solid #d4af37;padding:12px;border-radius:8px;font-family:'Cinzel',serif;font-size:0.95rem;cursor:pointer;">📊 Export Selected</button>
+                        <button onclick="closeExportDialog()" style="flex:1;background:#f8f9fa;color:#2c3e50;border:2px solid #bdc3c7;padding:12px;border-radius:8px;font-family:'Cinzel',serif;font-size:0.95rem;cursor:pointer;">Cancel</button>
+                    </div>
+                </div>`;
+            overlay.id = 'exportDialog';
+            document.body.appendChild(overlay);
+        }
+
+        function toggleAllSessions(cb) {
+            document.querySelectorAll('#sessionCheckboxes input[type="checkbox"]').forEach(c => c.checked = cb.checked);
+        }
+
+        function closeExportDialog() {
+            const d = document.getElementById('exportDialog');
+            if (d) d.remove();
+        }
+
+        function confirmExport() {
+            const checked = [...document.querySelectorAll('#sessionCheckboxes input[type="checkbox"]:checked')].map(c => parseInt(c.value));
+            if (checked.length === 0) { alert('Please select at least one session.'); return; }
+            closeExportDialog();
+            runExport(checked);
+        }
+
+        function runExport(indices) {
             const escape = val => '"' + String(val || '').replace(/"/g, '""') + '"';
 
             const headers = [
@@ -1053,7 +1104,7 @@
                 'Session Completed','Completion Date'
             ];
 
-            const rows = savedSessions.map(s => {
+            const rows = indices.map(i => { const s = savedSessions[i];
                 const tp = s.treatmentPlan || {};
                 const td = s.treatmentDetails || {};
                 const cs = s.completeSession || {};
@@ -1098,7 +1149,7 @@
             a.download = `five-element-sessions-${new Date().toISOString().split('T')[0]}.csv`;
             a.click();
             URL.revokeObjectURL(url);
-            alert(`Exported ${savedSessions.length} session(s) — all fields included.`);
+            alert(`Exported ${indices.length} session(s) — all fields included.`);
         }
 
         function clearForm() {
