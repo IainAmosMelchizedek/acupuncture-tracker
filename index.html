@@ -783,15 +783,14 @@
                 <button class="btn btn-success" onclick="saveCompleteSession()">💾 Save Complete Session</button>
                 <button class="btn btn-warning" onclick="exportSessions()">📊 Export All Sessions</button>
                 <button class="btn btn-secondary" onclick="showSavedSessions()">📋 View Saved Sessions</button>
-                <button class="btn" onclick="showStep('assessment')">Start New Session</button>
+                <button class="btn" onclick="startNewSession()">Start New Session</button>
             </div>
 
             <!-- Saved Sessions Display -->
             <div class="saved-sessions" id="savedSessionsContainer" style="display: none;">
                 <h3 style="color: #3498db; margin-bottom: 20px; font-family: 'Cinzel', serif;">Saved Assessment Sessions</h3>
                 <div id="sessionsList"></div>
-                <button class="btn btn-warning" onclick="exportSessions()">📊 Export All Sessions</button>
-                <button class="btn btn-secondary" onclick="hideSavedSessions()">← Back to Assessment</button>
+                <button class="btn btn-secondary" onclick="hideSavedSessions()">← Back to Session Review</button>
             </div>
         </div>
     </div>
@@ -991,19 +990,22 @@
                 last.completionDate = new Date().toISOString();
             }
             alert('Session review saved successfully. This session is now complete.');
+        }
+
+        function startNewSession() {
             if (confirm('Clear the form and start a new session?')) { clearForm(); showStep('assessment'); }
         }
 
         function showSavedSessions() {
-            ['assessment','planning','treatment','review'].forEach(s => document.getElementById(s).style.display = 'none');
+            document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.step-indicator').forEach(ind => ind.classList.remove('active'));
             document.getElementById('savedSessionsContainer').style.display = 'block';
             displaySessions();
         }
 
         function hideSavedSessions() {
-            document.getElementById('assessment').style.display = 'block';
-            ['planning','treatment','review'].forEach(s => document.getElementById(s).style.display = 'none');
             document.getElementById('savedSessionsContainer').style.display = 'none';
+            showStep('review');
         }
 
         function displaySessions() {
