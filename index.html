@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,378 +7,381 @@
     <title>Five Element Acupuncture Practice</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;500;600&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
 
-        body {
-            font-family: 'Crimson Text', serif;
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #1a252f 100%);
-            min-height: 100vh;
-            padding: 20px;
-            color: #2c3e50;
-        }
+```
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: linear-gradient(145deg, #f8f9fa, #ffffff);
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15), 0 0 0 1px rgba(52, 73, 94, 0.1);
-            overflow: hidden;
-            border: 1px solid #d4af37;
-        }
+    body {
+        font-family: 'Crimson Text', serif;
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #1a252f 100%);
+        min-height: 100vh;
+        padding: 20px;
+        color: #2c3e50;
+    }
 
-        .header {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            color: #d4af37;
-            padding: 40px 30px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: linear-gradient(145deg, #f8f9fa, #ffffff);
+        border-radius: 12px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.15), 0 0 0 1px rgba(52, 73, 94, 0.1);
+        overflow: hidden;
+        border: 1px solid #d4af37;
+    }
 
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background-image: 
-                radial-gradient(circle at 25% 25%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 75% 75%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
-            animation: rotate 20s linear infinite;
-        }
+    .header {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        color: #d4af37;
+        padding: 40px 30px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
 
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
+    .header::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background-image: 
+            radial-gradient(circle at 25% 25%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 75% 75%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+        animation: rotate 20s linear infinite;
+    }
 
-        .header h1 {
-            font-family: 'Cinzel', serif;
-            font-size: 2.5rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            position: relative;
-            z-index: 1;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
+    @keyframes rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
 
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            position: relative;
-            z-index: 1;
-            font-style: italic;
-        }
+    .header h1 {
+        font-family: 'Cinzel', serif;
+        font-size: 2.5rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        position: relative;
+        z-index: 1;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
 
-        .main-content {
-            padding: 40px;
-            background: #fefefe;
-        }
+    .header p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        position: relative;
+        z-index: 1;
+        font-style: italic;
+    }
 
-        .workflow-container {
-            margin-bottom: 40px;
-        }
+    .main-content {
+        padding: 40px;
+        background: #fefefe;
+    }
 
-        .workflow-steps {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
+    .workflow-container {
+        margin-bottom: 40px;
+    }
 
-        .step-indicator {
-            padding: 15px 25px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid #bdc3c7;
-            background: linear-gradient(145deg, #ecf0f1, #ffffff);
-            color: #34495e;
-            font-family: 'Cinzel', serif;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
+    .workflow-steps {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
 
-        .step-indicator.active {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            color: #d4af37;
-            border-color: #d4af37;
-            box-shadow: 0 8px 25px rgba(52, 73, 94, 0.3);
-            transform: translateY(-2px);
-        }
+    .step-indicator {
+        padding: 15px 25px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 2px solid #bdc3c7;
+        background: linear-gradient(145deg, #ecf0f1, #ffffff);
+        color: #34495e;
+        font-family: 'Cinzel', serif;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
 
-        .step-indicator.completed {
-            background: linear-gradient(145deg, #f8f9fa, #ffffff);
-            border-color: #27ae60;
-            color: #27ae60;
-        }
+    .step-indicator.active {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        color: #d4af37;
+        border-color: #d4af37;
+        box-shadow: 0 8px 25px rgba(52, 73, 94, 0.3);
+        transform: translateY(-2px);
+    }
 
-        .step-content {
-            display: none;
-            background: linear-gradient(145deg, #f8f9fa, #ffffff);
-            border-radius: 12px;
-            padding: 30px;
-            border: 1px solid #d4af37;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
-        }
+    .step-indicator.completed {
+        background: linear-gradient(145deg, #f8f9fa, #ffffff);
+        border-color: #27ae60;
+        color: #27ae60;
+    }
 
-        .step-content.active {
-            display: block;
-            animation: fadeIn 0.4s ease-in;
-        }
+    .step-content {
+        display: none;
+        background: linear-gradient(145deg, #f8f9fa, #ffffff);
+        border-radius: 12px;
+        padding: 30px;
+        border: 1px solid #d4af37;
+        box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    .step-content.active {
+        display: block;
+        animation: fadeIn 0.4s ease-in;
+    }
 
-        .step-content h3 {
-            color: #2c3e50;
-            margin-bottom: 25px;
-            font-size: 1.4rem;
-            font-family: 'Cinzel', serif;
-            font-weight: 500;
-            border-bottom: 2px solid #d4af37;
-            padding-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
 
-        .step-content h4 {
-            color: #34495e;
-            margin: 25px 0 15px 0;
-            font-family: 'Cinzel', serif;
-            font-weight: 500;
-            border-bottom: 1px solid #bdc3c7;
-            padding-bottom: 8px;
-        }
+    .step-content h3 {
+        color: #2c3e50;
+        margin-bottom: 25px;
+        font-size: 1.4rem;
+        font-family: 'Cinzel', serif;
+        font-weight: 500;
+        border-bottom: 2px solid #d4af37;
+        padding-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
 
-        .form-row {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
+    .step-content h4 {
+        color: #34495e;
+        margin: 25px 0 15px 0;
+        font-family: 'Cinzel', serif;
+        font-weight: 500;
+        border-bottom: 1px solid #bdc3c7;
+        padding-bottom: 8px;
+    }
 
-        .form-group {
-            flex: 1;
-            min-width: 200px;
-        }
+    .form-row {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 25px;
+        flex-wrap: wrap;
+    }
 
-        .form-group.full-width {
-            flex: 1 1 100%;
-        }
+    .form-group {
+        flex: 1;
+        min-width: 200px;
+    }
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #2c3e50;
-            font-size: 0.95rem;
-        }
+    .form-group.full-width {
+        flex: 1 1 100%;
+    }
 
-        input, textarea, select {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #bdc3c7;
-            border-radius: 8px;
-            font-size: 16px;
-            font-family: 'Crimson Text', serif;
-            transition: all 0.3s ease;
-            background: #ffffff;
-        }
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #2c3e50;
+        font-size: 0.95rem;
+    }
 
-        input:focus, textarea:focus, select:focus {
-            outline: none;
-            border-color: #d4af37;
-            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
-            background: #fefefe;
-        }
+    input, textarea, select {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #bdc3c7;
+        border-radius: 8px;
+        font-size: 16px;
+        font-family: 'Crimson Text', serif;
+        transition: all 0.3s ease;
+        background: #ffffff;
+    }
 
-        textarea {
-            resize: vertical;
-            min-height: 100px;
-            line-height: 1.6;
-        }
+    input:focus, textarea:focus, select:focus {
+        outline: none;
+        border-color: #d4af37;
+        box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+        background: #fefefe;
+    }
 
-        .btn {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            color: #d4af37;
-            border: 2px solid #d4af37;
-            padding: 15px 30px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            font-family: 'Cinzel', serif;
-            transition: all 0.3s ease;
-            margin: 10px 5px 10px 0;
-        }
+    textarea {
+        resize: vertical;
+        min-height: 100px;
+        line-height: 1.6;
+    }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(52, 73, 94, 0.3);
-            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
-        }
+    .btn {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        color: #d4af37;
+        border: 2px solid #d4af37;
+        padding: 15px 30px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        font-family: 'Cinzel', serif;
+        transition: all 0.3s ease;
+        margin: 10px 5px 10px 0;
+    }
 
-        .btn-secondary {
-            background: linear-gradient(135deg, #1a252f 0%, #2c3e50 100%);
-            border-color: #d4af37;
-            color: #d4af37;
-        }
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(52, 73, 94, 0.3);
+        background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+    }
 
-        .btn-secondary:hover {
-            background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%);
-            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.25);
-        }
+    .btn-secondary {
+        background: linear-gradient(135deg, #1a252f 0%, #2c3e50 100%);
+        border-color: #d4af37;
+        color: #d4af37;
+    }
 
-        .btn-warning {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            border-color: #a0896a;
-            color: #e8d5b0;
-        }
+    .btn-secondary:hover {
+        background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%);
+        box-shadow: 0 8px 25px rgba(212, 175, 55, 0.25);
+    }
 
-        .btn-warning:hover {
-            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
-            box-shadow: 0 8px 25px rgba(160, 137, 106, 0.3);
-        }
+    .btn-warning {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        border-color: #a0896a;
+        color: #e8d5b0;
+    }
 
-        .btn-success {
-            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
-            border-color: #d4af37;
-            color: #d4af37;
-        }
+    .btn-warning:hover {
+        background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+        box-shadow: 0 8px 25px rgba(160, 137, 106, 0.3);
+    }
 
-        .btn-success:hover {
-            background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%);
-            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
-        }
+    .btn-success {
+        background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+        border-color: #d4af37;
+        color: #d4af37;
+    }
 
-        .status-indicator {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
+    .btn-success:hover {
+        background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%);
+        box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+    }
 
-        .status-pending { background: #bdc3c7; }
-        .status-current { background: #d4af37; }
-        .status-complete { background: #27ae60; }
+    .status-indicator {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
 
-        .save-session-container {
-            margin-top: 30px;
-            padding: 25px;
-            background: linear-gradient(145deg, #f8f9fa, #ffffff);
-            border-radius: 12px;
-                                border: 2px solid #d4af37;
-        }
+    .status-pending { background: #bdc3c7; }
+    .status-current { background: #d4af37; }
+    .status-complete { background: #27ae60; }
 
-        .saved-sessions {
-            margin-top: 40px;
-            padding: 30px;
-            background: linear-gradient(145deg, #f0f8ff, #ffffff);
-            border-radius: 12px;
-            border: 2px solid #3498db;
-        }
+    .save-session-container {
+        margin-top: 30px;
+        padding: 25px;
+        background: linear-gradient(145deg, #f8f9fa, #ffffff);
+        border-radius: 12px;
+                            border: 2px solid #d4af37;
+    }
 
-        .session-card {
-            background: #ffffff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
+    .saved-sessions {
+        margin-top: 40px;
+        padding: 30px;
+        background: linear-gradient(145deg, #f0f8ff, #ffffff);
+        border-radius: 12px;
+        border: 2px solid #3498db;
+    }
 
-        .session-card h5 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-            font-family: 'Cinzel', serif;
-        }
+    .session-card {
+        background: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
 
-        .session-data {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            font-size: 0.9rem;
-        }
+    .session-card h5 {
+        color: #2c3e50;
+        margin-bottom: 10px;
+        font-family: 'Cinzel', serif;
+    }
 
-        .data-group {
-            background: #f8f9fa;
-            padding: 10px;
-            border-radius: 6px;
-        }
+    .session-data {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 15px;
+        font-size: 0.9rem;
+    }
 
-        .data-group strong {
-            color: #34495e;
-        }
+    .data-group {
+        background: #f8f9fa;
+        padding: 10px;
+        border-radius: 6px;
+    }
 
-        .point-item {
-            transition: all 0.2s ease;
-            margin-bottom: 5px;
-        }
+    .data-group strong {
+        color: #34495e;
+    }
 
-        .point-item:hover {
-            background: linear-gradient(145deg, #e3f2fd, #f0f8ff);
-            transform: translateX(5px);
-        }
+    .point-item {
+        transition: all 0.2s ease;
+        margin-bottom: 5px;
+    }
 
-        .point-item div {
-            border-left: 3px solid #d4af37;
-        }
+    .point-item:hover {
+        background: linear-gradient(145deg, #e3f2fd, #f0f8ff);
+        transform: translateX(5px);
+    }
 
-        .treatment-point {
-            background: linear-gradient(145deg, #f8f9fa, #ffffff);
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 10px;
-        }
+    .point-item div {
+        border-left: 3px solid #d4af37;
+    }
 
-        .treatment-point-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
+    .treatment-point {
+        background: linear-gradient(145deg, #f8f9fa, #ffffff);
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 10px;
+    }
 
-        .treatment-point-header strong {
-            color: #2c3e50;
-            font-family: 'Cinzel', serif;
-        }
+    .treatment-point-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
 
-        .treatment-details {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
+    .treatment-point-header strong {
+        color: #2c3e50;
+        font-family: 'Cinzel', serif;
+    }
 
-        .detail-group {
-            flex: 1;
-            min-width: 150px;
-        }
+    .treatment-details {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
 
-        .detail-group label {
-            font-size: 0.8rem;
-            color: #666;
-            margin-bottom: 3px;
-        }
+    .detail-group {
+        flex: 1;
+        min-width: 150px;
+    }
 
-        .detail-group select {
-            padding: 8px 10px;
-            font-size: 0.9rem;
-        }
-    </style>
+    .detail-group label {
+        font-size: 0.8rem;
+        color: #666;
+        margin-bottom: 3px;
+    }
+
+    .detail-group select {
+        padding: 8px 10px;
+        font-size: 0.9rem;
+    }
+</style>
+```
+
 </head>
 <body>
     <div class="container">
@@ -386,797 +390,800 @@
             <p>Traditional Chinese Medicine Session Management System</p>
         </div>
 
-        <div class="main-content">
-            <div class="workflow-container">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="sessionDate">Session Date:</label>
-                        <input type="date" id="sessionDate" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="sessionTime">Session Time:</label>
-                        <input type="time" id="sessionTime" required>
-                    </div>
+```
+    <div class="main-content">
+        <div class="workflow-container">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="sessionDate">Session Date:</label>
+                    <input type="date" id="sessionDate" required>
                 </div>
-            </div>
-
-            <div class="workflow-steps">
-                <div class="step-indicator active" data-step="assessment">
-                    <span class="status-indicator status-current"></span>
-                    I. Patient Assessment
+                <div class="form-group">
+                    <label for="sessionTime">Session Time:</label>
+                    <input type="time" id="sessionTime" required>
                 </div>
-                <div class="step-indicator" data-step="planning">
-                    <span class="status-indicator status-pending"></span>
-                    II. Treatment Planning
-                </div>
-                <div class="step-indicator" data-step="treatment">
-                    <span class="status-indicator status-pending"></span>
-                    III. Live Treatment
-                </div>
-                <div class="step-indicator" data-step="review">
-                    <span class="status-indicator status-pending"></span>
-                    IV. Session Review
-                </div>
-            </div>
-
-            <!-- Step 1: Assessment -->
-            <div class="step-content active" id="assessment">
-                <h3>I. Patient Assessment</h3>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="constitutionalType">Primary Constitutional Type:</label>
-                        <select id="constitutionalType">
-                            <option value="">Select Type (if determined)</option>
-                            <option value="Wood" selected>Wood - Liver/Gallbladder</option>
-                            <option value="Fire">Fire - Heart/Small Intestine</option>
-                            <option value="Earth">Earth - Spleen/Stomach</option>
-                            <option value="Metal">Metal - Lung/Large Intestine</option>
-                            <option value="Water">Water - Kidney/Bladder</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="secondaryType">Secondary Type:</label>
-                        <select id="secondaryType">
-                            <option value="">None</option>
-                            <option value="Wood">Wood</option>
-                            <option value="Fire">Fire</option>
-                            <option value="Earth">Earth</option>
-                            <option value="Metal">Metal</option>
-                            <option value="Water">Water</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group full-width">
-                        <label for="symptomCategories">Symptom Categories:</label>
-                        <select id="symptomCategories" multiple style="height: 150px;">
-                            <option value="Anxiety/Insecurity">Anxiety/Feeling Insecure (Heart)</option>
-                            <option value="Emotional Protection">Difficulty with Love/Trust (Heart Protector)</option>
-                            <option value="Temperature Issues">Hot/Cold Emotionally (Three Heater)</option>
-                            <option value="Planning/Action">Procrastination/Decision Issues (Liver)</option>
-                            <option value="Letting Go">Can't Let Go/Move On (Large Intestine)</option>
-                            <option value="Receiving/Nurturing">Trouble Receiving/Feeling Satisfied (Stomach)</option>
-                            <option value="Clarity/Sorting">Mental Confusion/Overwhelm (Small Intestine)</option>
-                            <option value="Decision Making">Indecisiveness (Gallbladder)</option>
-                            <option value="Transformation">Stuck Patterns/Worry (Spleen)</option>
-                            <option value="Grief/Inspiration">Grief/Breathing Issues (Lung)</option>
-                            <option value="Essence/Will">Low Energy/Motivation (Kidney)</option>
-                            <option value="Courage/Drive">Fear/Lack of Drive (Bladder)</option>
-                            <option value="Physical Pain">Physical Pain/Discomfort</option>
-                            <option value="Other">Other Symptoms</option>
-                        </select>
-                        <small style="color: #666; font-style: italic;">Hold Ctrl/Cmd to select multiple categories</small>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group full-width">
-                        <label for="symptomDetails">Detailed Symptom Description:</label>
-                        <textarea id="symptomDetails" placeholder="Describe current symptoms, concerns, and what brought you in today..."></textarea>
-                    </div>
-                </div>
-
-                <h4>Tongue Assessment</h4>
-                <p style="font-style: italic; color: #666; margin-bottom: 20px; font-size: 0.9rem;">
-                    Observe tongue for no more than 20 seconds. Look from tip to back, then sides.
-                </p>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="tongueBodyColor">Tongue Body Color:</label>
-                        <select id="tongueBodyColor">
-                            <option value="">Select Body Color</option>
-                            <option value="Normal Pink">Normal Pink</option>
-                            <option value="Pale">Pale (Qi/Blood deficiency)</option>
-                            <option value="Red">Red (Heat/inflammation)</option>
-                            <option value="Deep Red">Deep Red (Severe heat)</option>
-                            <option value="Purple">Purple (Blood stagnation)</option>
-                            <option value="Purple-Dark">Purple-Dark (Severe stagnation)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="tongueCoating">Tongue Coating:</label>
-                        <select id="tongueCoating">
-                            <option value="">Select Coating</option>
-                            <option value="Thin White">Thin White (Healthy/balanced)</option>
-                            <option value="Thick White">Thick White (Dampness/phlegm)</option>
-                            <option value="Greasy White">Greasy White (Dampness/food stagnation)</option>
-                            <option value="Thin Yellow">Thin Yellow (Mild heat)</option>
-                            <option value="Thick Yellow">Thick Yellow (Heat in digestive system)</option>
-                            <option value="Greasy Yellow">Greasy Yellow (Damp-heat)</option>
-                            <option value="Gray/Black">Gray/Black (Severe internal heat)</option>
-                            <option value="No Coating">No Coating (Yin deficiency)</option>
-                            <option value="Peeled Coating">Peeled/Patchy Coating</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="tongueTexture">Tongue Texture:</label>
-                        <select id="tongueTexture">
-                            <option value="">Select Texture</option>
-                            <option value="Normal">Normal</option>
-                            <option value="Swollen">Swollen (Dampness/Qi deficiency)</option>
-                            <option value="Swollen Scalloped">Swollen with Scalloped Edges</option>
-                            <option value="Thin">Thin (Blood/Yin deficiency)</option>
-                            <option value="Cracked">Cracked (Yin deficiency)</option>
-                            <option value="Deep Cracks">Deep Cracks (Severe Yin deficiency)</option>
-                            <option value="Geographic">Geographic Tongue (Patchy)</option>
-                            <option value="Rough">Rough/Bumpy Surface</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="tongueMovement">Tongue Movement:</label>
-                        <select id="tongueMovement">
-                            <option value="">Select Movement</option>
-                            <option value="Normal">Normal/Flexible</option>
-                            <option value="Quivering">Quivering (Qi deficiency/anxiety)</option>
-                            <option value="Trembling">Trembling (Spleen Qi Xu/stress)</option>
-                            <option value="Flaccid">Flaccid (Severe Qi/Blood deficiency)</option>
-                            <option value="Stiff">Stiff (Internal wind/blood stagnation)</option>
-                            <option value="Deviated">Deviated to one side (Internal wind)</option>
-                            <option value="Curled">Curled/Contracted</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="tongueTip">Tongue Tip (Heart/Emotional state):</label>
-                        <select id="tongueTip">
-                            <option value="">Select Tip Condition</option>
-                            <option value="Normal">Normal</option>
-                            <option value="Red">Red (Emotional stress/heart heat)</option>
-                            <option value="Very Red">Very Red (Severe emotional agitation)</option>
-                            <option value="Pale">Pale (Heart Qi deficiency)</option>
-                            <option value="Spots">Red spots/bumps</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="tongueSides">Tongue Sides (Liver/Gallbladder):</label>
-                        <select id="tongueSides">
-                            <option value="">Select Sides Condition</option>
-                            <option value="Normal">Normal</option>
-                            <option value="Red">Red (Liver heat/anger)</option>
-                            <option value="Dark Red">Dark Red (Liver fire)</option>
-                            <option value="Pale">Pale (Liver blood deficiency)</option>
-                            <option value="Teeth Marks">Teeth marks/indentations</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group full-width">
-                        <label for="tongueNotes">Additional Tongue Observations:</label>
-                        <textarea id="tongueNotes" placeholder="Note any other observations: specific crack patterns, spot locations, coating distribution, unusual features..." style="min-height: 80px;"></textarea>
-                    </div>
-                </div>
-
-                <h4>Pulse Diagnosis</h4>
-                
-                <!-- Left Hand -->
-                <div style="                    background: linear-gradient(145deg, #f0ede8, #fefcf8); padding: 25px; border-radius: 12px; margin-bottom: 25px; border: 2px solid #d4af37;">
-                    <h5 style="color: #d4af37; margin-bottom: 20px; font-family: 'Cinzel', serif; font-weight: 500; font-size: 1.1rem;">Left Hand Pulse Positions</h5>
-                    <div class="form-row">
-                        <div class="form-group"><label for="leftCunSuperficial">Cun Superficial (Small Intestine):</label><select id="leftCunSuperficial"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
-                        <div class="form-group"><label for="leftCunMiddle">Cun Middle (Heart):</label><select id="leftCunMiddle"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
-                        <div class="form-group"><label for="leftCunDeep">Cun Deep (Heart):</label><select id="leftCunDeep"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group"><label for="leftGuanSuperficial">Guan Superficial (Gallbladder):</label><select id="leftGuanSuperficial"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
-                        <div class="form-group"><label for="leftGuanMiddle">Guan Middle (Liver):</label><select id="leftGuanMiddle"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
-                        <div class="form-group"><label for="leftGuanDeep">Guan Deep (Liver):</label><select id="leftGuanDeep"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group"><label for="leftChiSuperficial">Chi Superficial (Bladder):</label><select id="leftChiSuperficial"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
-                        <div class="form-group"><label for="leftChiMiddle">Chi Middle (Kidney):</label><select id="leftChiMiddle"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
-                        <div class="form-group"><label for="leftChiDeep">Chi Deep (Kidney):</label><select id="leftChiDeep"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
-                    </div>
-                </div>
-
-                <!-- Right Hand -->
-                <div style="                    background: linear-gradient(145deg, #f0ede8, #fefcf8); padding: 25px; border-radius: 12px; margin-bottom: 25px; border: 2px solid #a0896a;">
-                    <h5 style="color: #a0896a; margin-bottom: 20px; font-family: 'Cinzel', serif; font-weight: 500; font-size: 1.1rem;">Right Hand Pulse Positions</h5>
-                    <div class="form-row">
-                        <div class="form-group"><label for="rightCunSuperficial">Cun Superficial (Large Intestine):</label><select id="rightCunSuperficial"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
-                        <div class="form-group"><label for="rightCunMiddle">Cun Middle (Stomach):</label><select id="rightCunMiddle"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
-                        <div class="form-group"><label for="rightCunDeep">Cun Deep (Lung):</label><select id="rightCunDeep"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group"><label for="rightGuanSuperficial">Guan Superficial (Stomach):</label><select id="rightGuanSuperficial"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
-                        <div class="form-group"><label for="rightGuanMiddle">Guan Middle (Spleen):</label><select id="rightGuanMiddle"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
-                        <div class="form-group"><label for="rightGuanDeep">Guan Deep (Spleen):</label><select id="rightGuanDeep"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group"><label for="rightChiSuperficial">Chi Superficial (Triple Warmer):</label><select id="rightChiSuperficial"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
-                        <div class="form-group"><label for="rightChiMiddle">Chi Middle (Pericardium):</label><select id="rightChiMiddle"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
-                        <div class="form-group"><label for="rightChiDeep">Chi Deep (Pericardium):</label><select id="rightChiDeep"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
-                    </div>
-                </div>
-
-                <div class="save-session-container">
-                    <h4 style="color: #d4af37; margin-bottom: 15px;">Save This Assessment</h4>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="sessionNotes">Session Notes:</label>
-                            <textarea id="sessionNotes" placeholder="Any additional notes about this session..." style="min-height: 80px;"></textarea>
-                        </div>
-                    </div>
-                    <button class="btn btn-success" onclick="saveAssessmentSession()">Save Assessment Session</button>
-                </div>
-
-                <button class="btn" onclick="completeAssessment()">Complete Assessment →</button>
-            </div>
-
-            <!-- Step 2: Treatment Planning -->
-            <div class="step-content" id="planning">
-                <h3>II. Treatment Planning</h3>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="causativeFactor">Causative Factor (CF):</label>
-                        <select id="causativeFactor">
-                            <option value="">Determine from Assessment</option>
-                            <option value="Wood">Wood (Liver/Gallbladder)</option>
-                            <option value="Fire">Fire (Heart/Small Intestine)</option>
-                            <option value="Earth">Earth (Spleen/Stomach)</option>
-                            <option value="Metal">Metal (Lung/Large Intestine)</option>
-                            <option value="Water">Water (Kidney/Bladder)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="treatmentStrategy">Treatment Strategy:</label>
-                        <select id="treatmentStrategy">
-                            <option value="">Select Strategy</option>
-                            <option value="Tonify CF">Tonify Causative Factor</option>
-                            <option value="Sedate CF">Sedate Causative Factor</option>
-                            <option value="Tonify Mother">Tonify Mother Element</option>
-                            <option value="Sedate Child">Sedate Child Element</option>
-                            <option value="Harmonize Ke Cycle">Harmonize Controlling Cycle</option>
-                            <option value="Drain Aggressive Energy">Drain Aggressive Energy</option>
-                            <option value="Entry-Exit Block">Clear Entry-Exit Block</option>
-                        </select>
-                    </div>
-                </div>
-
-                <h4>Point Selection</h4>
-                
-                <div class="form-row">
-                    <div class="form-group full-width">
-                        <label for="pointSearch">Search Points (by name, element, or spirit):</label>
-                        <input type="text" id="pointSearch" placeholder="Search 'Gate of Hope', 'Metal', 'Source Point'..." onkeyup="searchPoints()">
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group" style="flex: 2;">
-                        <label>Available Points:</label>
-                        <div id="pointList" style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; border-radius: 8px; padding: 10px; background: #fefefe;"></div>
-                    </div>
-                    <div class="form-group" style="flex: 1;">
-                        <label>Selected Points:</label>
-                        <div id="selectedPoints" style="min-height: 200px; border: 2px solid #d4af37; border-radius: 8px; padding: 15px; background: #fefefe;">
-                            <p style="color: #888; font-style: italic; text-align: center;">No points selected yet</p>
-                        </div>
-                        <button class="btn btn-warning" onclick="clearSelectedPoints()" style="margin-top: 10px; width: 100%;">Clear Selection</button>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group full-width">
-                        <label for="treatmentRationale">Treatment Rationale:</label>
-                        <textarea id="treatmentRationale" placeholder="Explain why these points were chosen based on the assessment..." style="min-height: 100px;"></textarea>
-                    </div>
-                </div>
-
-                <button class="btn" onclick="saveTreatmentPlan()">Save Treatment Plan</button>
-                <button class="btn btn-success" onclick="showStep('treatment')">Proceed to Live Treatment →</button>
-            </div>
-
-            <!-- Step 3: Live Treatment -->
-            <div class="step-content" id="treatment">
-                <h3>III. Live Treatment</h3>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="needleSize">Needle Size:</label>
-                        <select id="needleSize">
-                            <option value="0.16x15mm">0.16 × 15mm</option>
-                            <option value="0.18x25mm">0.18 × 25mm</option>
-                            <option value="0.20x30mm" selected>0.20 × 30mm</option>
-                            <option value="0.25x40mm">0.25 × 40mm</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="needleDepth">Average Depth:</label>
-                        <select id="needleDepth">
-                            <option value="Superficial">Superficial (2-5mm)</option>
-                            <option value="Medium" selected>Medium (10-15mm)</option>
-                            <option value="Deep">Deep (20-30mm)</option>
-                            <option value="Variable">Variable</option>
-                        </select>
-                    </div>
-                </div>
-
-                <h4>Point-by-Point Treatment Log</h4>
-                <div id="treatmentLog" style="margin-bottom: 30px;">
-                    <p style="color: #888; font-style: italic; text-align: center; padding: 20px;">Points will appear here after you save a treatment plan.</p>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group full-width">
-                        <label for="patientResponse">Patient's Immediate Response:</label>
-                        <textarea id="patientResponse" placeholder="Note any immediate reactions: deqi sensation, emotional release, color changes, etc." style="min-height: 100px;"></textarea>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group full-width">
-                        <label for="homework">Homework/Recommendations:</label>
-                        <textarea id="homework" placeholder="Self-care, dietary suggestions, mindfulness practices, element-specific activities..." style="min-height: 80px;"></textarea>
-                    </div>
-                </div>
-
-                <button class="btn" onclick="saveLiveTreatment()">Save Live Treatment</button>
-                <button class="btn btn-success" onclick="completeTreatment()">Complete Treatment Session →</button>
-            </div>
-
-            <!-- Step 4: Session Review -->
-            <div class="step-content" id="review">
-                <h3>IV. Session Review</h3>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="sessionRating">Overall Session Quality:</label>
-                        <select id="sessionRating">
-                            <option value="">Select Rating</option>
-                            <option value="Exceptional">Exceptional - Major shifts</option>
-                            <option value="Good">Good - Clear improvement</option>
-                            <option value="Moderate">Moderate - Some changes</option>
-                            <option value="Subtle">Subtle - Minor shifts</option>
-                            <option value="Neutral">Neutral - No clear changes</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="nextSession">Recommended Next Session:</label>
-                        <input type="date" id="nextSession">
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group full-width">
-                        <label for="practitionerReflections">Practitioner Reflections:</label>
-                        <textarea id="practitionerReflections" placeholder="What worked well? What would you do differently? Insights about the patient's journey..." style="min-height: 120px;"></textarea>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group full-width">
-                        <label for="patientFeedback">Patient Feedback (to be added after session):</label>
-                        <textarea id="patientFeedback" placeholder="Patient can add their experience, dreams, insights over the next few days..." style="min-height: 100px;"></textarea>
-                    </div>
-                </div>
-
-                <button class="btn btn-success" onclick="saveCompleteSession()">Save Complete Session</button>
-                <button class="btn btn-secondary" onclick="showSavedSessions()">View Saved Sessions</button>
-                <button class="btn" onclick="startNewSession()">Start New Session</button>
-            </div>
-
-            <!-- Saved Sessions Display -->
-            <div class="saved-sessions" id="savedSessionsContainer" style="display: none;">
-                <h3 style="color: #3498db; margin-bottom: 20px; font-family: 'Cinzel', serif;">Saved Assessment Sessions</h3>
-                <div id="sessionsList"></div>
-                <button class="btn btn-warning" onclick="exportSessions()">Export All Sessions</button>
-                <button class="btn btn-secondary" onclick="hideSavedSessions()">← Back to Session Review</button>
             </div>
         </div>
+
+        <div class="workflow-steps">
+            <div class="step-indicator active" data-step="assessment">
+                <span class="status-indicator status-current"></span>
+                I. Patient Assessment
+            </div>
+            <div class="step-indicator" data-step="planning">
+                <span class="status-indicator status-pending"></span>
+                II. Treatment Planning
+            </div>
+            <div class="step-indicator" data-step="treatment">
+                <span class="status-indicator status-pending"></span>
+                III. Live Treatment
+            </div>
+            <div class="step-indicator" data-step="review">
+                <span class="status-indicator status-pending"></span>
+                IV. Session Review
+            </div>
+        </div>
+
+        <!-- Step 1: Assessment -->
+        <div class="step-content active" id="assessment">
+            <h3>I. Patient Assessment</h3>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="constitutionalType">Primary Constitutional Type:</label>
+                    <select id="constitutionalType">
+                        <option value="">Select Type (if determined)</option>
+                        <option value="Wood" selected>Wood - Liver/Gallbladder</option>
+                        <option value="Fire">Fire - Heart/Small Intestine</option>
+                        <option value="Earth">Earth - Spleen/Stomach</option>
+                        <option value="Metal">Metal - Lung/Large Intestine</option>
+                        <option value="Water">Water - Kidney/Bladder</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="secondaryType">Secondary Type:</label>
+                    <select id="secondaryType">
+                        <option value="">None</option>
+                        <option value="Wood">Wood</option>
+                        <option value="Fire">Fire</option>
+                        <option value="Earth">Earth</option>
+                        <option value="Metal">Metal</option>
+                        <option value="Water">Water</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label for="symptomCategories">Symptom Categories:</label>
+                    <select id="symptomCategories" multiple style="height: 150px;">
+                        <option value="Anxiety/Insecurity">Anxiety/Feeling Insecure (Heart)</option>
+                        <option value="Emotional Protection">Difficulty with Love/Trust (Heart Protector)</option>
+                        <option value="Temperature Issues">Hot/Cold Emotionally (Three Heater)</option>
+                        <option value="Planning/Action">Procrastination/Decision Issues (Liver)</option>
+                        <option value="Letting Go">Can't Let Go/Move On (Large Intestine)</option>
+                        <option value="Receiving/Nurturing">Trouble Receiving/Feeling Satisfied (Stomach)</option>
+                        <option value="Clarity/Sorting">Mental Confusion/Overwhelm (Small Intestine)</option>
+                        <option value="Decision Making">Indecisiveness (Gallbladder)</option>
+                        <option value="Transformation">Stuck Patterns/Worry (Spleen)</option>
+                        <option value="Grief/Inspiration">Grief/Breathing Issues (Lung)</option>
+                        <option value="Essence/Will">Low Energy/Motivation (Kidney)</option>
+                        <option value="Courage/Drive">Fear/Lack of Drive (Bladder)</option>
+                        <option value="Physical Pain">Physical Pain/Discomfort</option>
+                        <option value="Other">Other Symptoms</option>
+                    </select>
+                    <small style="color: #666; font-style: italic;">Hold Ctrl/Cmd to select multiple categories</small>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label for="symptomDetails">Detailed Symptom Description:</label>
+                    <textarea id="symptomDetails" placeholder="Describe current symptoms, concerns, and what brought you in today..."></textarea>
+                </div>
+            </div>
+
+            <h4>Tongue Assessment</h4>
+            <p style="font-style: italic; color: #666; margin-bottom: 20px; font-size: 0.9rem;">
+                Observe tongue for no more than 20 seconds. Look from tip to back, then sides.
+            </p>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="tongueBodyColor">Tongue Body Color:</label>
+                    <select id="tongueBodyColor">
+                        <option value="">Select Body Color</option>
+                        <option value="Normal Pink">Normal Pink</option>
+                        <option value="Pale">Pale (Qi/Blood deficiency)</option>
+                        <option value="Red">Red (Heat/inflammation)</option>
+                        <option value="Deep Red">Deep Red (Severe heat)</option>
+                        <option value="Purple">Purple (Blood stagnation)</option>
+                        <option value="Purple-Dark">Purple-Dark (Severe stagnation)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="tongueCoating">Tongue Coating:</label>
+                    <select id="tongueCoating">
+                        <option value="">Select Coating</option>
+                        <option value="Thin White">Thin White (Healthy/balanced)</option>
+                        <option value="Thick White">Thick White (Dampness/phlegm)</option>
+                        <option value="Greasy White">Greasy White (Dampness/food stagnation)</option>
+                        <option value="Thin Yellow">Thin Yellow (Mild heat)</option>
+                        <option value="Thick Yellow">Thick Yellow (Heat in digestive system)</option>
+                        <option value="Greasy Yellow">Greasy Yellow (Damp-heat)</option>
+                        <option value="Gray/Black">Gray/Black (Severe internal heat)</option>
+                        <option value="No Coating">No Coating (Yin deficiency)</option>
+                        <option value="Peeled Coating">Peeled/Patchy Coating</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="tongueTexture">Tongue Texture:</label>
+                    <select id="tongueTexture">
+                        <option value="">Select Texture</option>
+                        <option value="Normal">Normal</option>
+                        <option value="Swollen">Swollen (Dampness/Qi deficiency)</option>
+                        <option value="Swollen Scalloped">Swollen with Scalloped Edges</option>
+                        <option value="Thin">Thin (Blood/Yin deficiency)</option>
+                        <option value="Cracked">Cracked (Yin deficiency)</option>
+                        <option value="Deep Cracks">Deep Cracks (Severe Yin deficiency)</option>
+                        <option value="Geographic">Geographic Tongue (Patchy)</option>
+                        <option value="Rough">Rough/Bumpy Surface</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="tongueMovement">Tongue Movement:</label>
+                    <select id="tongueMovement">
+                        <option value="">Select Movement</option>
+                        <option value="Normal">Normal/Flexible</option>
+                        <option value="Quivering">Quivering (Qi deficiency/anxiety)</option>
+                        <option value="Trembling">Trembling (Spleen Qi Xu/stress)</option>
+                        <option value="Flaccid">Flaccid (Severe Qi/Blood deficiency)</option>
+                        <option value="Stiff">Stiff (Internal wind/blood stagnation)</option>
+                        <option value="Deviated">Deviated to one side (Internal wind)</option>
+                        <option value="Curled">Curled/Contracted</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="tongueTip">Tongue Tip (Heart/Emotional state):</label>
+                    <select id="tongueTip">
+                        <option value="">Select Tip Condition</option>
+                        <option value="Normal">Normal</option>
+                        <option value="Red">Red (Emotional stress/heart heat)</option>
+                        <option value="Very Red">Very Red (Severe emotional agitation)</option>
+                        <option value="Pale">Pale (Heart Qi deficiency)</option>
+                        <option value="Spots">Red spots/bumps</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="tongueSides">Tongue Sides (Liver/Gallbladder):</label>
+                    <select id="tongueSides">
+                        <option value="">Select Sides Condition</option>
+                        <option value="Normal">Normal</option>
+                        <option value="Red">Red (Liver heat/anger)</option>
+                        <option value="Dark Red">Dark Red (Liver fire)</option>
+                        <option value="Pale">Pale (Liver blood deficiency)</option>
+                        <option value="Teeth Marks">Teeth marks/indentations</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label for="tongueNotes">Additional Tongue Observations:</label>
+                    <textarea id="tongueNotes" placeholder="Note any other observations: specific crack patterns, spot locations, coating distribution, unusual features..." style="min-height: 80px;"></textarea>
+                </div>
+            </div>
+
+            <h4>Pulse Diagnosis</h4>
+            
+            <!-- Left Hand -->
+            <div style="                    background: linear-gradient(145deg, #f0ede8, #fefcf8); padding: 25px; border-radius: 12px; margin-bottom: 25px; border: 2px solid #d4af37;">
+                <h5 style="color: #d4af37; margin-bottom: 20px; font-family: 'Cinzel', serif; font-weight: 500; font-size: 1.1rem;">Left Hand Pulse Positions</h5>
+                <div class="form-row">
+                    <div class="form-group"><label for="leftCunSuperficial">Cun Superficial (Small Intestine):</label><select id="leftCunSuperficial"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
+                    <div class="form-group"><label for="leftCunMiddle">Cun Middle (Heart):</label><select id="leftCunMiddle"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
+                    <div class="form-group"><label for="leftCunDeep">Cun Deep (Heart):</label><select id="leftCunDeep"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label for="leftGuanSuperficial">Guan Superficial (Gallbladder):</label><select id="leftGuanSuperficial"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
+                    <div class="form-group"><label for="leftGuanMiddle">Guan Middle (Liver):</label><select id="leftGuanMiddle"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
+                    <div class="form-group"><label for="leftGuanDeep">Guan Deep (Liver):</label><select id="leftGuanDeep"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label for="leftChiSuperficial">Chi Superficial (Bladder):</label><select id="leftChiSuperficial"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
+                    <div class="form-group"><label for="leftChiMiddle">Chi Middle (Kidney):</label><select id="leftChiMiddle"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
+                    <div class="form-group"><label for="leftChiDeep">Chi Deep (Kidney):</label><select id="leftChiDeep"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
+                </div>
+            </div>
+
+            <!-- Right Hand -->
+            <div style="                    background: linear-gradient(145deg, #f0ede8, #fefcf8); padding: 25px; border-radius: 12px; margin-bottom: 25px; border: 2px solid #a0896a;">
+                <h5 style="color: #a0896a; margin-bottom: 20px; font-family: 'Cinzel', serif; font-weight: 500; font-size: 1.1rem;">Right Hand Pulse Positions</h5>
+                <div class="form-row">
+                    <div class="form-group"><label for="rightCunSuperficial">Cun Superficial (Large Intestine):</label><select id="rightCunSuperficial"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
+                    <div class="form-group"><label for="rightCunMiddle">Cun Middle (Stomach):</label><select id="rightCunMiddle"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
+                    <div class="form-group"><label for="rightCunDeep">Cun Deep (Lung):</label><select id="rightCunDeep"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label for="rightGuanSuperficial">Guan Superficial (Stomach):</label><select id="rightGuanSuperficial"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
+                    <div class="form-group"><label for="rightGuanMiddle">Guan Middle (Spleen):</label><select id="rightGuanMiddle"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
+                    <div class="form-group"><label for="rightGuanDeep">Guan Deep (Spleen):</label><select id="rightGuanDeep"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label for="rightChiSuperficial">Chi Superficial (Triple Warmer):</label><select id="rightChiSuperficial"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
+                    <div class="form-group"><label for="rightChiMiddle">Chi Middle (Pericardium):</label><select id="rightChiMiddle"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
+                    <div class="form-group"><label for="rightChiDeep">Chi Deep (Pericardium):</label><select id="rightChiDeep"><option value="">Select Quality</option><option value="Normal">Normal</option><option value="Floating">Floating (Fu Mai)</option><option value="Deep">Deep (Chen Mai)</option><option value="Slow">Slow (Chi Mai)</option><option value="Rapid">Rapid (Shu Mai)</option><option value="Slippery">Slippery (Hua Mai)</option><option value="Choppy">Choppy (Se Mai)</option><option value="Empty">Empty (Xu Mai)</option><option value="Full">Full (Shi Mai)</option><option value="Weak">Weak (Ruo Mai)</option><option value="Tight">Tight (Jin Mai)</option></select></div>
+                </div>
+            </div>
+
+            <div class="save-session-container">
+                <h4 style="color: #d4af37; margin-bottom: 15px;">Save This Assessment</h4>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="sessionNotes">Session Notes:</label>
+                        <textarea id="sessionNotes" placeholder="Any additional notes about this session..." style="min-height: 80px;"></textarea>
+                    </div>
+                </div>
+                <button class="btn btn-success" onclick="saveAssessmentSession()">Save Assessment Session</button>
+            </div>
+
+            <button class="btn" onclick="completeAssessment()">Complete Assessment →</button>
+        </div>
+
+        <!-- Step 2: Treatment Planning -->
+        <div class="step-content" id="planning">
+            <h3>II. Treatment Planning</h3>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="causativeFactor">Causative Factor (CF):</label>
+                    <select id="causativeFactor">
+                        <option value="">Determine from Assessment</option>
+                        <option value="Wood">Wood (Liver/Gallbladder)</option>
+                        <option value="Fire">Fire (Heart/Small Intestine)</option>
+                        <option value="Earth">Earth (Spleen/Stomach)</option>
+                        <option value="Metal">Metal (Lung/Large Intestine)</option>
+                        <option value="Water">Water (Kidney/Bladder)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="treatmentStrategy">Treatment Strategy:</label>
+                    <select id="treatmentStrategy">
+                        <option value="">Select Strategy</option>
+                        <option value="Tonify CF">Tonify Causative Factor</option>
+                        <option value="Sedate CF">Sedate Causative Factor</option>
+                        <option value="Tonify Mother">Tonify Mother Element</option>
+                        <option value="Sedate Child">Sedate Child Element</option>
+                        <option value="Harmonize Ke Cycle">Harmonize Controlling Cycle</option>
+                        <option value="Drain Aggressive Energy">Drain Aggressive Energy</option>
+                        <option value="Entry-Exit Block">Clear Entry-Exit Block</option>
+                    </select>
+                </div>
+            </div>
+
+            <h4>Point Selection</h4>
+            
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label for="pointSearch">Search Points (by name, element, or spirit):</label>
+                    <input type="text" id="pointSearch" placeholder="Search 'Gate of Hope', 'Metal', 'Source Point'..." onkeyup="searchPoints()">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group" style="flex: 2;">
+                    <label>Available Points:</label>
+                    <div id="pointList" style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; border-radius: 8px; padding: 10px; background: #fefefe;"></div>
+                </div>
+                <div class="form-group" style="flex: 1;">
+                    <label>Selected Points:</label>
+                    <div id="selectedPoints" style="min-height: 200px; border: 2px solid #d4af37; border-radius: 8px; padding: 15px; background: #fefefe;">
+                        <p style="color: #888; font-style: italic; text-align: center;">No points selected yet</p>
+                    </div>
+                    <button class="btn btn-warning" onclick="clearSelectedPoints()" style="margin-top: 10px; width: 100%;">Clear Selection</button>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label for="treatmentRationale">Treatment Rationale:</label>
+                    <textarea id="treatmentRationale" placeholder="Explain why these points were chosen based on the assessment..." style="min-height: 100px;"></textarea>
+                </div>
+            </div>
+
+            <button class="btn" onclick="saveTreatmentPlan()">Save Treatment Plan</button>
+            <button class="btn btn-success" onclick="showStep('treatment')">Proceed to Live Treatment →</button>
+        </div>
+
+        <!-- Step 3: Live Treatment -->
+        <div class="step-content" id="treatment">
+            <h3>III. Live Treatment</h3>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="needleSize">Needle Size:</label>
+                    <select id="needleSize">
+                        <option value="0.16x15mm">0.16 × 15mm</option>
+                        <option value="0.18x25mm">0.18 × 25mm</option>
+                        <option value="0.20x30mm" selected>0.20 × 30mm</option>
+                        <option value="0.25x40mm">0.25 × 40mm</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="needleDepth">Average Depth:</label>
+                    <select id="needleDepth">
+                        <option value="Superficial">Superficial (2-5mm)</option>
+                        <option value="Medium" selected>Medium (10-15mm)</option>
+                        <option value="Deep">Deep (20-30mm)</option>
+                        <option value="Variable">Variable</option>
+                    </select>
+                </div>
+            </div>
+
+            <h4>Point-by-Point Treatment Log</h4>
+            <div id="treatmentLog" style="margin-bottom: 30px;">
+                <p style="color: #888; font-style: italic; text-align: center; padding: 20px;">Points will appear here after you save a treatment plan.</p>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label for="patientResponse">Patient's Immediate Response:</label>
+                    <textarea id="patientResponse" placeholder="Note any immediate reactions: deqi sensation, emotional release, color changes, etc." style="min-height: 100px;"></textarea>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label for="homework">Homework/Recommendations:</label>
+                    <textarea id="homework" placeholder="Self-care, dietary suggestions, mindfulness practices, element-specific activities..." style="min-height: 80px;"></textarea>
+                </div>
+            </div>
+
+            <button class="btn" onclick="saveLiveTreatment()">Save Live Treatment</button>
+            <button class="btn btn-success" onclick="completeTreatment()">Complete Treatment Session →</button>
+        </div>
+
+        <!-- Step 4: Session Review -->
+        <div class="step-content" id="review">
+            <h3>IV. Session Review</h3>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="sessionRating">Overall Session Quality:</label>
+                    <select id="sessionRating">
+                        <option value="">Select Rating</option>
+                        <option value="Exceptional">Exceptional - Major shifts</option>
+                        <option value="Good">Good - Clear improvement</option>
+                        <option value="Moderate">Moderate - Some changes</option>
+                        <option value="Subtle">Subtle - Minor shifts</option>
+                        <option value="Neutral">Neutral - No clear changes</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="nextSession">Recommended Next Session:</label>
+                    <input type="date" id="nextSession">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label for="practitionerReflections">Practitioner Reflections:</label>
+                    <textarea id="practitionerReflections" placeholder="What worked well? What would you do differently? Insights about the patient's journey..." style="min-height: 120px;"></textarea>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label for="patientFeedback">Patient Feedback (to be added after session):</label>
+                    <textarea id="patientFeedback" placeholder="Patient can add their experience, dreams, insights over the next few days..." style="min-height: 100px;"></textarea>
+                </div>
+            </div>
+
+            <button class="btn btn-success" onclick="saveCompleteSession()">Save Complete Session</button>
+            <button class="btn btn-secondary" onclick="showSavedSessions()">View Saved Sessions</button>
+            <button class="btn" onclick="startNewSession()">Start New Session</button>
+        </div>
+
+        <!-- Saved Sessions Display -->
+        <div class="saved-sessions" id="savedSessionsContainer" style="display: none;">
+            <h3 style="color: #3498db; margin-bottom: 20px; font-family: 'Cinzel', serif;">Saved Assessment Sessions</h3>
+            <div id="sessionsList"></div>
+            <button class="btn btn-warning" onclick="exportSessions()">Export All Sessions</button>
+            <button class="btn btn-secondary" onclick="hideSavedSessions()">← Back to Session Review</button>
+        </div>
     </div>
+</div>
 
-    <script>
-        document.getElementById('sessionDate').valueAsDate = new Date();
-        const now = new Date();
-        document.getElementById('sessionTime').value = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+<script>
+    document.getElementById('sessionDate').valueAsDate = new Date();
+    const now = new Date();
+    document.getElementById('sessionTime').value = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
 
-        let currentStep = 'assessment';
-        let savedSessions = [];
-        let selectedPoints = [];
-        let currentTreatmentPlan = null;
+    let currentStep = 'assessment';
+    let savedSessions = [];
+    let selectedPoints = [];
+    let currentTreatmentPlan = null;
 
-        const fiveElementPoints = [
-            { id:"LU9", code:"LU9", pinyin:"Taiyuan", englishName:"Great Abyss", spiritualName:"Supreme Source", meridian:"Lung", element:"Metal", pointType:"Source Point, Shu-Stream (Earth), Horary Point", resonance:"Where ancestral Qi gathers. Influences grief, letting go, and inspiration.", commonUse:"Tonify Lung Qi and Yin. Connect to ancestral energy." },
-            { id:"LI4", code:"LI4", pinyin:"Hegu", englishName:"Union Valley", spiritualName:"Great Eliminator", meridian:"Large Intestine", element:"Metal", pointType:"Source Point", resonance:"Releases what is stuck. Eliminates toxins (physical & emotional).", commonUse:"Release grief, pain, stagnation. Famous 'Four Gates' with LV3." },
-            { id:"ST25", code:"ST25", pinyin:"Tianshu", englishName:"Celestial Pivot", spiritualName:"Gate of Hope", meridian:"Stomach", element:"Earth", pointType:"Front-Mu Point of Large Intestine", resonance:"The pivot between heaven and earth in the abdomen. Where hope enters.", commonUse:"Transform worry, receive nourishment, digestive issues." },
-            { id:"SP3", code:"SP3", pinyin:"Taibai", englishName:"Supreme White", spiritualName:"Great Clarity", meridian:"Spleen", element:"Earth", pointType:"Source Point, Shu-Stream (Earth)", resonance:"Brings clarity from overwhelm. Grounds scattered energy.", commonUse:"Tonify Spleen, resolve worry, improve concentration." },
-            { id:"HT7", code:"HT7", pinyin:"Shenmen", englishName:"Spirit Gate", spiritualName:"Gate of the Shen", meridian:"Heart", element:"Fire", pointType:"Source Point, Shu-Stream (Earth)", resonance:"The gatekeeper of the Spirit (Shen). Calms agitation.", commonUse:"Calm anxiety, insomnia, emotional turmoil. Connect to joy." },
-            { id:"SI3", code:"SI3", pinyin:"Houxi", englishName:"Back Stream", spiritualName:"Rear Ravine", meridian:"Small Intestine", element:"Fire", pointType:"Shu-Stream (Wood), Command Point", resonance:"Sorts pure from impure (physically & emotionally).", commonUse:"Clarity, decision-making, neck/shoulder tension." },
-            { id:"BL67", code:"BL67", pinyin:"Zhiyin", englishName:"Reach Yin", spiritualName:"Ultimate Yin", meridian:"Bladder", element:"Water", pointType:"Jing-Well (Metal)", resonance:"Connects to deepest reserves. Access willpower (Zhi).", commonUse:"Turn breech babies, access courage, fear issues." },
-            { id:"KI3", code:"KI3", pinyin:"Taixi", englishName:"Great Stream", spiritualName:"Supreme Ravine", meridian:"Kidney", element:"Water", pointType:"Source Point, Shu-Stream (Earth)", resonance:"The great stream of ancestral essence (Jing).", commonUse:"Tonify Kidney Yin & Yang. Low back, fear, willpower." },
-            { id:"PC6", code:"PC6", pinyin:"Neiguan", englishName:"Inner Pass", spiritualName:"Inner Frontier Gate", meridian:"Pericardium", element:"Fire", pointType:"Luo-Connecting Point", resonance:"Protects the Heart. What we let in/keep out emotionally.", commonUse:"Calm Shen, nausea, chest tightness, emotional protection." },
-            { id:"TE5", code:"TE5", pinyin:"Waiguan", englishName:"Outer Pass", spiritualName:"Outer Frontier Gate", meridian:"Triple Warmer", element:"Fire", pointType:"Luo-Connecting Point", resonance:"Regulates boundaries with the external world.", commonUse:"Fever, external pathogens, shoulder pain, relationship boundaries." },
-            { id:"GB34", code:"GB34", pinyin:"Yanglingquan", englishName:"Yang Mound Spring", spiritualName:"Sunlit Plateau Spring", meridian:"Gallbladder", element:"Wood", pointType:"He-Sea (Earth), Influential Point for Sinews", resonance:"Spring of decisive action from planning.", commonUse:"Sinew pain, decision-making, courage to act." },
-            { id:"LV3", code:"LV3", pinyin:"Taichong", englishName:"Great Surge", spiritualName:"Supreme Rushing", meridian:"Liver", element:"Wood", pointType:"Source Point, Shu-Stream (Earth)", resonance:"The great surge of Qi. Regulates smooth flow of emotions.", commonUse:"Move stagnant Qi (anger, frustration), headache, 'Four Gates'." },
-            { id:"GV20", code:"GV20", pinyin:"Baihui", englishName:"Hundred Convergences", spiritualName:"Meeting of Heaven", meridian:"Governing Vessel", element:"N/A (Yang)", pointType:"Sea of Marrow Point", resonance:"Where all Yang channels meet. Connects to heaven/inspiration.", commonUse:"Lift Yang, clear mind, depression, spiritual connection." },
-            { id:"CV17", code:"CV17", pinyin:"Shanzhong", englishName:"Chest Center", spiritualName:"Sea of Tranquility", meridian:"Conception Vessel", element:"N/A (Yin)", pointType:"Influential Point for Qi, Front-Mu of Pericardium", resonance:"The gathering place of Qi in the chest. Calms the emotional sea.", commonUse:"Regulate Qi, calm Shen, chest tightness, grief." }
+    const fiveElementPoints = [
+        { id:"LU9", code:"LU9", pinyin:"Taiyuan", englishName:"Great Abyss", spiritualName:"Supreme Source", meridian:"Lung", element:"Metal", pointType:"Source Point, Shu-Stream (Earth), Horary Point", resonance:"Where ancestral Qi gathers. Influences grief, letting go, and inspiration.", commonUse:"Tonify Lung Qi and Yin. Connect to ancestral energy." },
+        { id:"LI4", code:"LI4", pinyin:"Hegu", englishName:"Union Valley", spiritualName:"Great Eliminator", meridian:"Large Intestine", element:"Metal", pointType:"Source Point", resonance:"Releases what is stuck. Eliminates toxins (physical & emotional).", commonUse:"Release grief, pain, stagnation. Famous 'Four Gates' with LV3." },
+        { id:"ST25", code:"ST25", pinyin:"Tianshu", englishName:"Celestial Pivot", spiritualName:"Gate of Hope", meridian:"Stomach", element:"Earth", pointType:"Front-Mu Point of Large Intestine", resonance:"The pivot between heaven and earth in the abdomen. Where hope enters.", commonUse:"Transform worry, receive nourishment, digestive issues." },
+        { id:"SP3", code:"SP3", pinyin:"Taibai", englishName:"Supreme White", spiritualName:"Great Clarity", meridian:"Spleen", element:"Earth", pointType:"Source Point, Shu-Stream (Earth)", resonance:"Brings clarity from overwhelm. Grounds scattered energy.", commonUse:"Tonify Spleen, resolve worry, improve concentration." },
+        { id:"HT7", code:"HT7", pinyin:"Shenmen", englishName:"Spirit Gate", spiritualName:"Gate of the Shen", meridian:"Heart", element:"Fire", pointType:"Source Point, Shu-Stream (Earth)", resonance:"The gatekeeper of the Spirit (Shen). Calms agitation.", commonUse:"Calm anxiety, insomnia, emotional turmoil. Connect to joy." },
+        { id:"SI3", code:"SI3", pinyin:"Houxi", englishName:"Back Stream", spiritualName:"Rear Ravine", meridian:"Small Intestine", element:"Fire", pointType:"Shu-Stream (Wood), Command Point", resonance:"Sorts pure from impure (physically & emotionally).", commonUse:"Clarity, decision-making, neck/shoulder tension." },
+        { id:"BL67", code:"BL67", pinyin:"Zhiyin", englishName:"Reach Yin", spiritualName:"Ultimate Yin", meridian:"Bladder", element:"Water", pointType:"Jing-Well (Metal)", resonance:"Connects to deepest reserves. Access willpower (Zhi).", commonUse:"Turn breech babies, access courage, fear issues." },
+        { id:"KI3", code:"KI3", pinyin:"Taixi", englishName:"Great Stream", spiritualName:"Supreme Ravine", meridian:"Kidney", element:"Water", pointType:"Source Point, Shu-Stream (Earth)", resonance:"The great stream of ancestral essence (Jing).", commonUse:"Tonify Kidney Yin & Yang. Low back, fear, willpower." },
+        { id:"PC6", code:"PC6", pinyin:"Neiguan", englishName:"Inner Pass", spiritualName:"Inner Frontier Gate", meridian:"Pericardium", element:"Fire", pointType:"Luo-Connecting Point", resonance:"Protects the Heart. What we let in/keep out emotionally.", commonUse:"Calm Shen, nausea, chest tightness, emotional protection." },
+        { id:"TE5", code:"TE5", pinyin:"Waiguan", englishName:"Outer Pass", spiritualName:"Outer Frontier Gate", meridian:"Triple Warmer", element:"Fire", pointType:"Luo-Connecting Point", resonance:"Regulates boundaries with the external world.", commonUse:"Fever, external pathogens, shoulder pain, relationship boundaries." },
+        { id:"GB34", code:"GB34", pinyin:"Yanglingquan", englishName:"Yang Mound Spring", spiritualName:"Sunlit Plateau Spring", meridian:"Gallbladder", element:"Wood", pointType:"He-Sea (Earth), Influential Point for Sinews", resonance:"Spring of decisive action from planning.", commonUse:"Sinew pain, decision-making, courage to act." },
+        { id:"LV3", code:"LV3", pinyin:"Taichong", englishName:"Great Surge", spiritualName:"Supreme Rushing", meridian:"Liver", element:"Wood", pointType:"Source Point, Shu-Stream (Earth)", resonance:"The great surge of Qi. Regulates smooth flow of emotions.", commonUse:"Move stagnant Qi (anger, frustration), headache, 'Four Gates'." },
+        { id:"GV20", code:"GV20", pinyin:"Baihui", englishName:"Hundred Convergences", spiritualName:"Meeting of Heaven", meridian:"Governing Vessel", element:"N/A (Yang)", pointType:"Sea of Marrow Point", resonance:"Where all Yang channels meet. Connects to heaven/inspiration.", commonUse:"Lift Yang, clear mind, depression, spiritual connection." },
+        { id:"CV17", code:"CV17", pinyin:"Shanzhong", englishName:"Chest Center", spiritualName:"Sea of Tranquility", meridian:"Conception Vessel", element:"N/A (Yin)", pointType:"Influential Point for Qi, Front-Mu of Pericardium", resonance:"The gathering place of Qi in the chest. Calms the emotional sea.", commonUse:"Regulate Qi, calm Shen, chest tightness, grief." }
+    ];
+
+    function showStep(stepName) {
+        document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
+        document.getElementById(stepName).classList.add('active');
+        document.querySelectorAll('.step-indicator').forEach(ind => {
+            ind.classList.remove('active');
+            const dot = ind.querySelector('.status-indicator');
+            if (ind.dataset.step === stepName) { ind.classList.add('active'); dot.className = 'status-indicator status-current'; }
+            else { dot.className = 'status-indicator status-pending'; }
+        });
+        currentStep = stepName;
+        if (stepName === 'planning') initializePointList();
+        if (stepName === 'treatment' && currentTreatmentPlan) initializeTreatmentLog();
+    }
+
+    document.querySelectorAll('.step-indicator').forEach(ind => {
+        ind.addEventListener('click', () => showStep(ind.dataset.step));
+    });
+
+    function completeAssessment() { showStep('planning'); }
+
+    function saveAssessmentSession() {
+        const sessionData = {
+            id: Date.now(),
+            timestamp: new Date().toISOString(),
+            date: document.getElementById('sessionDate').value,
+            time: document.getElementById('sessionTime').value,
+            constitutionalType: document.getElementById('constitutionalType').value,
+            secondaryType: document.getElementById('secondaryType').value,
+            symptomCategories: Array.from(document.getElementById('symptomCategories').selectedOptions).map(o => o.value),
+            symptomDetails: document.getElementById('symptomDetails').value,
+            tongueBodyColor: document.getElementById('tongueBodyColor').value,
+            tongueCoating: document.getElementById('tongueCoating').value,
+            tongueTexture: document.getElementById('tongueTexture').value,
+            tongueMovement: document.getElementById('tongueMovement').value,
+            tongueTip: document.getElementById('tongueTip').value,
+            tongueSides: document.getElementById('tongueSides').value,
+            tongueNotes: document.getElementById('tongueNotes').value,
+            leftCunSuperficial: document.getElementById('leftCunSuperficial').value,
+            leftCunMiddle: document.getElementById('leftCunMiddle').value,
+            leftCunDeep: document.getElementById('leftCunDeep').value,
+            leftGuanSuperficial: document.getElementById('leftGuanSuperficial').value,
+            leftGuanMiddle: document.getElementById('leftGuanMiddle').value,
+            leftGuanDeep: document.getElementById('leftGuanDeep').value,
+            leftChiSuperficial: document.getElementById('leftChiSuperficial').value,
+            leftChiMiddle: document.getElementById('leftChiMiddle').value,
+            leftChiDeep: document.getElementById('leftChiDeep').value,
+            rightCunSuperficial: document.getElementById('rightCunSuperficial').value,
+            rightCunMiddle: document.getElementById('rightCunMiddle').value,
+            rightCunDeep: document.getElementById('rightCunDeep').value,
+            rightGuanSuperficial: document.getElementById('rightGuanSuperficial').value,
+            rightGuanMiddle: document.getElementById('rightGuanMiddle').value,
+            rightGuanDeep: document.getElementById('rightGuanDeep').value,
+            rightChiSuperficial: document.getElementById('rightChiSuperficial').value,
+            rightChiMiddle: document.getElementById('rightChiMiddle').value,
+            rightChiDeep: document.getElementById('rightChiDeep').value,
+            sessionNotes: document.getElementById('sessionNotes').value
+        };
+        savedSessions.push(sessionData);
+        alert('Patient assessment saved successfully. Please continue with the Complete Assessment button.');
+    }
+
+    function initializePointList() {
+        const pointList = document.getElementById('pointList');
+        pointList.innerHTML = '';
+        fiveElementPoints.forEach(point => {
+            const div = document.createElement('div');
+            div.className = 'point-item';
+            div.innerHTML = `<div style="padding:10px;border-bottom:1px solid #eee;cursor:pointer;"><strong>${point.spiritualName}</strong> (${point.code})<br><small style="color:#666;">${point.meridian} • ${point.element} • ${point.pointType}</small><br><small>${point.resonance.substring(0,80)}...</small></div>`;
+            div.onclick = () => selectPoint(point);
+            pointList.appendChild(div);
+        });
+    }
+
+    function selectPoint(point) {
+        if (!selectedPoints.find(p => p.id === point.id)) {
+            selectedPoints.push(point);
+            updateSelectedPointsDisplay();
+        }
+    }
+
+    function updateSelectedPointsDisplay() {
+        const container = document.getElementById('selectedPoints');
+        if (selectedPoints.length === 0) { container.innerHTML = '<p style="color:#888;font-style:italic;text-align:center;">No points selected yet</p>'; return; }
+        let html = '<div style="display:flex;flex-wrap:wrap;gap:10px;">';
+        selectedPoints.forEach(p => {
+            html += `<div style="background:linear-gradient(145deg,#f8f9fa,#ffffff);border:1px solid #d4af37;border-radius:6px;padding:8px 12px;flex:1;min-width:200px;"><strong>${p.spiritualName}</strong><br><small>${p.code} • ${p.element}</small><button onclick="removePoint('${p.id}')" style="float:right;background:#e74c3c;color:white;border:none;border-radius:4px;padding:2px 8px;cursor:pointer;">×</button></div>`;
+        });
+        html += '</div>';
+        container.innerHTML = html;
+    }
+
+    function removePoint(id) { selectedPoints = selectedPoints.filter(p => p.id !== id); updateSelectedPointsDisplay(); }
+    function clearSelectedPoints() { selectedPoints = []; updateSelectedPointsDisplay(); }
+
+    function searchPoints() {
+        const term = document.getElementById('pointSearch').value.toLowerCase();
+        document.querySelectorAll('.point-item').forEach(item => {
+            item.style.display = item.textContent.toLowerCase().includes(term) ? 'block' : 'none';
+        });
+    }
+
+    function saveTreatmentPlan() {
+        if (selectedPoints.length === 0) { alert('Please select at least one point for the treatment plan.'); return; }
+        currentTreatmentPlan = {
+            causativeFactor: document.getElementById('causativeFactor').value,
+            strategy: document.getElementById('treatmentStrategy').value,
+            rationale: document.getElementById('treatmentRationale').value,
+            selectedPoints: selectedPoints.map(p => ({ id:p.id, code:p.code, spiritualName:p.spiritualName, element:p.element, meridian:p.meridian, resonance:p.resonance }))
+        };
+        alert('Treatment plan saved successfully. Please continue with the Proceed to Live Treatment button.');
+    }
+
+    function initializeTreatmentLog() {
+        const log = document.getElementById('treatmentLog');
+        if (!currentTreatmentPlan || !currentTreatmentPlan.selectedPoints) { log.innerHTML = '<p style="color:#888;font-style:italic;text-align:center;padding:20px;">No treatment plan saved yet.</p>'; return; }
+        let html = '';
+        currentTreatmentPlan.selectedPoints.forEach((point, i) => {
+            html += `<div class="treatment-point" id="treatmentPoint${i}"><div class="treatment-point-header"><strong>${point.spiritualName}</strong> (${point.code})<small style="color:#666;">${point.meridian} • ${point.element}</small></div><div class="treatment-details"><div class="detail-group"><label>Needle Sensation (Deqi):</label><select id="sensation${i}"><option value="">Select</option><option value="Strong">Strong - Clear arrival of Qi</option><option value="Moderate">Moderate - Good connection</option><option value="Mild">Mild - Subtle sensation</option><option value="None">None - No sensation</option><option value="Painful">Painful - Uncomfortable</option></select></div><div class="detail-group"><label>Needle Depth:</label><select id="depth${i}"><option value="">Select</option><option value="Superficial">Superficial (2-5mm)</option><option value="Medium">Medium (10-15mm)</option><option value="Deep">Deep (20-30mm)</option></select></div><div class="detail-group"><label>Manipulation:</label><select id="manipulation${i}"><option value="">Select</option><option value="Tonify">Tonify (clockwise)</option><option value="Sedate">Sedate (counter-clockwise)</option><option value="Even">Even (no manipulation)</option><option value="Peking">Peking Technique</option><option value="Tonify-Sedate">Tonify then Sedate</option></select></div><div class="detail-group"><label>Retention Time:</label><select id="retention${i}"><option value="">Select</option><option value="5">5 minutes</option><option value="10">10 minutes</option><option value="15">15 minutes</option><option value="20">20 minutes</option><option value="25">25 minutes</option><option value="30">30+ minutes</option></select></div></div><div style="margin-top:10px;"><label style="font-size:0.8rem;color:#666;">Notes for this point:</label><input type="text" id="pointNotes${i}" placeholder="Any specific observations..." style="width:100%;padding:8px;border:1px solid #ddd;border-radius:4px;"></div></div>`;
+        });
+        log.innerHTML = html;
+    }
+
+    function saveLiveTreatment() {
+        if (!currentTreatmentPlan) { alert('Please save a treatment plan before saving the live treatment.'); return; }
+        const details = {
+            needleSize: document.getElementById('needleSize').value,
+            needleDepth: document.getElementById('needleDepth').value,
+            patientResponse: document.getElementById('patientResponse').value,
+            homework: document.getElementById('homework').value,
+            pointDetails: []
+        };
+        currentTreatmentPlan.selectedPoints.forEach((point, i) => {
+            details.pointDetails.push({
+                pointId: point.id, pointName: point.spiritualName,
+                sensation: document.getElementById(`sensation${i}`)?.value || '',
+                depth: document.getElementById(`depth${i}`)?.value || '',
+                manipulation: document.getElementById(`manipulation${i}`)?.value || '',
+                retention: document.getElementById(`retention${i}`)?.value || '',
+                notes: document.getElementById(`pointNotes${i}`)?.value || ''
+            });
+        });
+        if (savedSessions.length > 0) {
+            const last = savedSessions[savedSessions.length - 1];
+            last.treatmentPlan = currentTreatmentPlan;
+            last.treatmentDetails = details;
+        }
+        alert('Live treatment saved successfully. Please continue with the Complete Treatment Session button.');
+    }
+
+    function completeTreatment() {
+        if (!currentTreatmentPlan) { alert('Please save a treatment plan first.'); return; }
+        showStep('review');
+    }
+
+    function saveCompleteSession() {
+        const review = {
+            rating: document.getElementById('sessionRating').value,
+            nextSession: document.getElementById('nextSession').value,
+            practitionerReflections: document.getElementById('practitionerReflections').value,
+            patientFeedback: document.getElementById('patientFeedback').value
+        };
+        if (savedSessions.length > 0) {
+            const last = savedSessions[savedSessions.length - 1];
+            last.completeSession = review;
+            last.completed = true;
+            last.completionDate = new Date().toISOString();
+        }
+        alert('Session review saved successfully. This session is now complete.');
+    }
+
+    function startNewSession() {
+        if (confirm('Clear the form and start a new session?')) { clearForm(); showStep('assessment'); }
+    }
+
+    function showSavedSessions() {
+        document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.step-indicator').forEach(ind => ind.classList.remove('active'));
+        document.getElementById('savedSessionsContainer').style.display = 'block';
+        displaySessions();
+    }
+
+    function hideSavedSessions() {
+        document.getElementById('savedSessionsContainer').style.display = 'none';
+        showStep('review');
+    }
+
+    function displaySessions() {
+        const list = document.getElementById('sessionsList');
+        if (savedSessions.length === 0) { list.innerHTML = '<p style="text-align:center;color:#888;font-style:italic;">No sessions saved yet.</p>'; return; }
+        let html = '';
+        [...savedSessions].reverse().forEach((session, i) => {
+            const d = new Date(session.timestamp);
+            const symptoms = session.symptomCategories?.length > 0 ? session.symptomCategories.join(', ') : 'None selected';
+            html += `<div class="session-card"><h5>Session ${savedSessions.length - i} - ${d.toLocaleDateString()} at ${session.time}</h5><div class="session-data"><div class="data-group"><strong>Constitutional:</strong> ${session.constitutionalType}${session.secondaryType ? ' / ' + session.secondaryType : ''}</div><div class="data-group"><strong>Symptoms:</strong> ${symptoms}</div><div class="data-group"><strong>Tongue:</strong> Body: ${session.tongueBodyColor} | Coating: ${session.tongueCoating}</div><div class="data-group"><strong>Treatment:</strong> ${session.treatmentPlan ? session.treatmentPlan.selectedPoints.length + ' points' : 'Not planned'}</div></div>${session.sessionNotes ? '<p style="margin-top:10px;font-style:italic;">"' + session.sessionNotes + '"</p>' : ''}</div>`;
+        });
+        list.innerHTML = html;
+    }
+
+    // ========== UPDATED EXPORT FUNCTION — ALL FIELDS ==========
+    function exportSessions() {
+        if (savedSessions.length === 0) { alert('No sessions to export yet!'); return; }
+
+        if (savedSessions.length === 1) {
+            runExport([0]);
+            return;
+        }
+
+        // Build selection dialog
+        let options = savedSessions.map((s, i) =>
+            `<label style="display:block;margin:8px 0;font-family:'Crimson Text',serif;font-size:1rem;">
+                <input type="checkbox" value="${i}" style="margin-right:8px;width:auto;">
+                Session ${i+1} — ${s.date} at ${s.time} (${s.constitutionalType || 'No type'})
+            </label>`
+        ).join('');
+
+        const overlay = document.createElement('div');
+        overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999;display:flex;align-items:center;justify-content:center;';
+        overlay.innerHTML = `
+            <div style="background:#fff;border:2px solid #d4af37;border-radius:12px;padding:30px;max-width:500px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+                <h4 style="font-family:'Cinzel',serif;color:#2c3e50;margin-bottom:15px;border-bottom:2px solid #d4af37;padding-bottom:10px;">Select Sessions to Export</h4>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block;margin:8px 0;font-family:'Crimson Text',serif;font-size:1rem;font-weight:bold;">
+                        <input type="checkbox" id="selectAllSessions" style="margin-right:8px;width:auto;" onchange="toggleAllSessions(this)">
+                        Export All Sessions
+                    </label>
+                    <hr style="border-color:#eee;margin:10px 0;">
+                    <div id="sessionCheckboxes">${options}</div>
+                </div>
+                <div style="display:flex;gap:10px;margin-top:20px;">
+                    <button onclick="confirmExport()" style="flex:1;background:linear-gradient(135deg,#2c3e50,#34495e);color:#d4af37;border:2px solid #d4af37;padding:12px;border-radius:8px;font-family:'Cinzel',serif;font-size:0.95rem;cursor:pointer;">📊 Export Selected</button>
+                    <button onclick="closeExportDialog()" style="flex:1;background:#f8f9fa;color:#2c3e50;border:2px solid #bdc3c7;padding:12px;border-radius:8px;font-family:'Cinzel',serif;font-size:0.95rem;cursor:pointer;">Cancel</button>
+                </div>
+            </div>`;
+        overlay.id = 'exportDialog';
+        document.body.appendChild(overlay);
+    }
+
+    function toggleAllSessions(cb) {
+        document.querySelectorAll('#sessionCheckboxes input[type="checkbox"]').forEach(c => c.checked = cb.checked);
+    }
+
+    function closeExportDialog() {
+        const d = document.getElementById('exportDialog');
+        if (d) d.remove();
+    }
+
+    function confirmExport() {
+        const checked = [...document.querySelectorAll('#sessionCheckboxes input[type="checkbox"]:checked')].map(c => parseInt(c.value));
+        if (checked.length === 0) { alert('Please select at least one session.'); return; }
+        closeExportDialog();
+        runExport(checked);
+    }
+
+    function runExport(indices) {
+        const escape = val => '"' + String(val || '').replace(/"/g, '""') + '"';
+
+        const headers = [
+            // Basic Info
+            'Date','Time',
+            // Assessment
+            'Constitutional Type','Secondary Type',
+            'Symptom Categories','Symptom Details',
+            // Tongue
+            'Tongue Body Color','Tongue Coating','Tongue Texture','Tongue Movement',
+            'Tongue Tip','Tongue Sides','Tongue Notes',
+            // Left Hand Pulse (9 columns)
+            'Left Cun Superficial (Small Intestine)','Left Cun Middle (Heart)','Left Cun Deep (Heart)',
+            'Left Guan Superficial (Gallbladder)','Left Guan Middle (Liver)','Left Guan Deep (Liver)',
+            'Left Chi Superficial (Bladder)','Left Chi Middle (Kidney)','Left Chi Deep (Kidney)',
+            // Right Hand Pulse (9 columns)
+            'Right Cun Superficial (Large Intestine)','Right Cun Middle (Stomach)','Right Cun Deep (Lung)',
+            'Right Guan Superficial (Stomach)','Right Guan Middle (Spleen)','Right Guan Deep (Spleen)',
+            'Right Chi Superficial (Triple Warmer)','Right Chi Middle (Pericardium)','Right Chi Deep (Pericardium)',
+            // Session Notes
+            'Session Notes',
+            // Treatment Plan
+            'Causative Factor','Treatment Strategy','Treatment Rationale','Treatment Points',
+            // Live Treatment
+            'Needle Size','Average Needle Depth','Patient Immediate Response','Homework/Recommendations',
+            // Point-by-Point Details
+            'Point Details (Sensation | Depth | Manipulation | Retention | Notes)',
+            // Session Review
+            'Session Rating','Next Session Date','Practitioner Reflections','Patient Feedback',
+            // Meta
+            'Session Completed','Completion Date'
         ];
 
-        function showStep(stepName) {
-            document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
-            document.getElementById(stepName).classList.add('active');
-            document.querySelectorAll('.step-indicator').forEach(ind => {
-                ind.classList.remove('active');
-                const dot = ind.querySelector('.status-indicator');
-                if (ind.dataset.step === stepName) { ind.classList.add('active'); dot.className = 'status-indicator status-current'; }
-                else { dot.className = 'status-indicator status-pending'; }
-            });
-            currentStep = stepName;
-            if (stepName === 'planning') initializePointList();
-            if (stepName === 'treatment' && currentTreatmentPlan) initializeTreatmentLog();
-        }
+        const rows = indices.map(i => { const s = savedSessions[i];
+            const tp = s.treatmentPlan || {};
+            const td = s.treatmentDetails || {};
+            const cs = s.completeSession || {};
 
-        document.querySelectorAll('.step-indicator').forEach(ind => {
-            ind.addEventListener('click', () => showStep(ind.dataset.step));
+            const treatmentPoints = tp.selectedPoints
+                ? tp.selectedPoints.map(p => `${p.spiritualName} (${p.code})`).join('; ')
+                : '';
+
+            const pointDetails = td.pointDetails
+                ? td.pointDetails.map(p =>
+                    `${p.pointName}: Sensation=${p.sensation} | Depth=${p.depth} | Manipulation=${p.manipulation} | Retention=${p.retention}min | Notes=${p.notes}`
+                  ).join(' || ')
+                : '';
+
+            return [
+                s.date, s.time,
+                s.constitutionalType, s.secondaryType,
+                (s.symptomCategories || []).join('; '), s.symptomDetails,
+                s.tongueBodyColor, s.tongueCoating, s.tongueTexture, s.tongueMovement,
+                s.tongueTip, s.tongueSides, s.tongueNotes,
+                s.leftCunSuperficial, s.leftCunMiddle, s.leftCunDeep,
+                s.leftGuanSuperficial, s.leftGuanMiddle, s.leftGuanDeep,
+                s.leftChiSuperficial, s.leftChiMiddle, s.leftChiDeep,
+                s.rightCunSuperficial, s.rightCunMiddle, s.rightCunDeep,
+                s.rightGuanSuperficial, s.rightGuanMiddle, s.rightGuanDeep,
+                s.rightChiSuperficial, s.rightChiMiddle, s.rightChiDeep,
+                s.sessionNotes,
+                tp.causativeFactor, tp.strategy, tp.rationale, treatmentPoints,
+                td.needleSize, td.needleDepth, td.patientResponse, td.homework,
+                pointDetails,
+                cs.rating, cs.nextSession, cs.practitionerReflections, cs.patientFeedback,
+                s.completed ? 'Yes' : 'No',
+                s.completionDate ? new Date(s.completionDate).toLocaleDateString() : ''
+            ].map(escape).join(',');
         });
 
-        function completeAssessment() { showStep('planning'); }
+        const csv = [headers.map(escape).join(','), ...rows].join('\n');
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `five-element-sessions-${new Date().toISOString().split('T')[0]}.csv`;
+        a.click();
+        URL.revokeObjectURL(url);
+        alert(`Exported ${indices.length} session(s) — all fields included.`);
+    }
 
-        function saveAssessmentSession() {
-            const sessionData = {
-                id: Date.now(),
-                timestamp: new Date().toISOString(),
-                date: document.getElementById('sessionDate').value,
-                time: document.getElementById('sessionTime').value,
-                constitutionalType: document.getElementById('constitutionalType').value,
-                secondaryType: document.getElementById('secondaryType').value,
-                symptomCategories: Array.from(document.getElementById('symptomCategories').selectedOptions).map(o => o.value),
-                symptomDetails: document.getElementById('symptomDetails').value,
-                tongueBodyColor: document.getElementById('tongueBodyColor').value,
-                tongueCoating: document.getElementById('tongueCoating').value,
-                tongueTexture: document.getElementById('tongueTexture').value,
-                tongueMovement: document.getElementById('tongueMovement').value,
-                tongueTip: document.getElementById('tongueTip').value,
-                tongueSides: document.getElementById('tongueSides').value,
-                tongueNotes: document.getElementById('tongueNotes').value,
-                leftCunSuperficial: document.getElementById('leftCunSuperficial').value,
-                leftCunMiddle: document.getElementById('leftCunMiddle').value,
-                leftCunDeep: document.getElementById('leftCunDeep').value,
-                leftGuanSuperficial: document.getElementById('leftGuanSuperficial').value,
-                leftGuanMiddle: document.getElementById('leftGuanMiddle').value,
-                leftGuanDeep: document.getElementById('leftGuanDeep').value,
-                leftChiSuperficial: document.getElementById('leftChiSuperficial').value,
-                leftChiMiddle: document.getElementById('leftChiMiddle').value,
-                leftChiDeep: document.getElementById('leftChiDeep').value,
-                rightCunSuperficial: document.getElementById('rightCunSuperficial').value,
-                rightCunMiddle: document.getElementById('rightCunMiddle').value,
-                rightCunDeep: document.getElementById('rightCunDeep').value,
-                rightGuanSuperficial: document.getElementById('rightGuanSuperficial').value,
-                rightGuanMiddle: document.getElementById('rightGuanMiddle').value,
-                rightGuanDeep: document.getElementById('rightGuanDeep').value,
-                rightChiSuperficial: document.getElementById('rightChiSuperficial').value,
-                rightChiMiddle: document.getElementById('rightChiMiddle').value,
-                rightChiDeep: document.getElementById('rightChiDeep').value,
-                sessionNotes: document.getElementById('sessionNotes').value
-            };
-            savedSessions.push(sessionData);
-            alert('Patient assessment saved successfully. Please continue with the Complete Assessment button.');
-        }
+    function clearForm() {
+        document.getElementById('constitutionalType').value = 'Wood';
+        document.getElementById('secondaryType').value = '';
+        document.getElementById('symptomCategories').selectedIndex = -1;
+        document.getElementById('symptomDetails').value = '';
+        document.getElementById('tongueBodyColor').value = '';
+        document.getElementById('tongueCoating').value = '';
+        document.getElementById('tongueTexture').value = '';
+        document.getElementById('tongueMovement').value = '';
+        document.getElementById('tongueTip').value = '';
+        document.getElementById('tongueSides').value = '';
+        document.getElementById('tongueNotes').value = '';
+        document.getElementById('sessionNotes').value = '';
+        ['leftCunSuperficial','leftCunMiddle','leftCunDeep','leftGuanSuperficial','leftGuanMiddle','leftGuanDeep','leftChiSuperficial','leftChiMiddle','leftChiDeep','rightCunSuperficial','rightCunMiddle','rightCunDeep','rightGuanSuperficial','rightGuanMiddle','rightGuanDeep','rightChiSuperficial','rightChiMiddle','rightChiDeep'].forEach(id => document.getElementById(id).value = '');
+        document.getElementById('sessionDate').valueAsDate = new Date();
+        const n = new Date();
+        document.getElementById('sessionTime').value = n.getHours().toString().padStart(2,'0') + ':' + n.getMinutes().toString().padStart(2,'0');
+        selectedPoints = [];
+        currentTreatmentPlan = null;
+    }
+</script>
+```
 
-        function initializePointList() {
-            const pointList = document.getElementById('pointList');
-            pointList.innerHTML = '';
-            fiveElementPoints.forEach(point => {
-                const div = document.createElement('div');
-                div.className = 'point-item';
-                div.innerHTML = `<div style="padding:10px;border-bottom:1px solid #eee;cursor:pointer;"><strong>${point.spiritualName}</strong> (${point.code})<br><small style="color:#666;">${point.meridian} • ${point.element} • ${point.pointType}</small><br><small>${point.resonance.substring(0,80)}...</small></div>`;
-                div.onclick = () => selectPoint(point);
-                pointList.appendChild(div);
-            });
-        }
-
-        function selectPoint(point) {
-            if (!selectedPoints.find(p => p.id === point.id)) {
-                selectedPoints.push(point);
-                updateSelectedPointsDisplay();
-            }
-        }
-
-        function updateSelectedPointsDisplay() {
-            const container = document.getElementById('selectedPoints');
-            if (selectedPoints.length === 0) { container.innerHTML = '<p style="color:#888;font-style:italic;text-align:center;">No points selected yet</p>'; return; }
-            let html = '<div style="display:flex;flex-wrap:wrap;gap:10px;">';
-            selectedPoints.forEach(p => {
-                html += `<div style="background:linear-gradient(145deg,#f8f9fa,#ffffff);border:1px solid #d4af37;border-radius:6px;padding:8px 12px;flex:1;min-width:200px;"><strong>${p.spiritualName}</strong><br><small>${p.code} • ${p.element}</small><button onclick="removePoint('${p.id}')" style="float:right;background:#e74c3c;color:white;border:none;border-radius:4px;padding:2px 8px;cursor:pointer;">×</button></div>`;
-            });
-            html += '</div>';
-            container.innerHTML = html;
-        }
-
-        function removePoint(id) { selectedPoints = selectedPoints.filter(p => p.id !== id); updateSelectedPointsDisplay(); }
-        function clearSelectedPoints() { selectedPoints = []; updateSelectedPointsDisplay(); }
-
-        function searchPoints() {
-            const term = document.getElementById('pointSearch').value.toLowerCase();
-            document.querySelectorAll('.point-item').forEach(item => {
-                item.style.display = item.textContent.toLowerCase().includes(term) ? 'block' : 'none';
-            });
-        }
-
-        function saveTreatmentPlan() {
-            if (selectedPoints.length === 0) { alert('Please select at least one point for the treatment plan.'); return; }
-            currentTreatmentPlan = {
-                causativeFactor: document.getElementById('causativeFactor').value,
-                strategy: document.getElementById('treatmentStrategy').value,
-                rationale: document.getElementById('treatmentRationale').value,
-                selectedPoints: selectedPoints.map(p => ({ id:p.id, code:p.code, spiritualName:p.spiritualName, element:p.element, meridian:p.meridian, resonance:p.resonance }))
-            };
-            alert('Treatment plan saved successfully. Please continue with the Proceed to Live Treatment button.');
-        }
-
-        function initializeTreatmentLog() {
-            const log = document.getElementById('treatmentLog');
-            if (!currentTreatmentPlan || !currentTreatmentPlan.selectedPoints) { log.innerHTML = '<p style="color:#888;font-style:italic;text-align:center;padding:20px;">No treatment plan saved yet.</p>'; return; }
-            let html = '';
-            currentTreatmentPlan.selectedPoints.forEach((point, i) => {
-                html += `<div class="treatment-point" id="treatmentPoint${i}"><div class="treatment-point-header"><strong>${point.spiritualName}</strong> (${point.code})<small style="color:#666;">${point.meridian} • ${point.element}</small></div><div class="treatment-details"><div class="detail-group"><label>Needle Sensation (Deqi):</label><select id="sensation${i}"><option value="">Select</option><option value="Strong">Strong - Clear arrival of Qi</option><option value="Moderate">Moderate - Good connection</option><option value="Mild">Mild - Subtle sensation</option><option value="None">None - No sensation</option><option value="Painful">Painful - Uncomfortable</option></select></div><div class="detail-group"><label>Needle Depth:</label><select id="depth${i}"><option value="">Select</option><option value="Superficial">Superficial (2-5mm)</option><option value="Medium">Medium (10-15mm)</option><option value="Deep">Deep (20-30mm)</option></select></div><div class="detail-group"><label>Manipulation:</label><select id="manipulation${i}"><option value="">Select</option><option value="Tonify">Tonify (clockwise)</option><option value="Sedate">Sedate (counter-clockwise)</option><option value="Even">Even (no manipulation)</option><option value="Peking">Peking Technique</option><option value="Tonify-Sedate">Tonify then Sedate</option></select></div><div class="detail-group"><label>Retention Time:</label><select id="retention${i}"><option value="">Select</option><option value="5">5 minutes</option><option value="10">10 minutes</option><option value="15">15 minutes</option><option value="20">20 minutes</option><option value="25">25 minutes</option><option value="30">30+ minutes</option></select></div></div><div style="margin-top:10px;"><label style="font-size:0.8rem;color:#666;">Notes for this point:</label><input type="text" id="pointNotes${i}" placeholder="Any specific observations..." style="width:100%;padding:8px;border:1px solid #ddd;border-radius:4px;"></div></div>`;
-            });
-            log.innerHTML = html;
-        }
-
-        function saveLiveTreatment() {
-            if (!currentTreatmentPlan) { alert('Please save a treatment plan before saving the live treatment.'); return; }
-            const details = {
-                needleSize: document.getElementById('needleSize').value,
-                needleDepth: document.getElementById('needleDepth').value,
-                patientResponse: document.getElementById('patientResponse').value,
-                homework: document.getElementById('homework').value,
-                pointDetails: []
-            };
-            currentTreatmentPlan.selectedPoints.forEach((point, i) => {
-                details.pointDetails.push({
-                    pointId: point.id, pointName: point.spiritualName,
-                    sensation: document.getElementById(`sensation${i}`)?.value || '',
-                    depth: document.getElementById(`depth${i}`)?.value || '',
-                    manipulation: document.getElementById(`manipulation${i}`)?.value || '',
-                    retention: document.getElementById(`retention${i}`)?.value || '',
-                    notes: document.getElementById(`pointNotes${i}`)?.value || ''
-                });
-            });
-            if (savedSessions.length > 0) {
-                const last = savedSessions[savedSessions.length - 1];
-                last.treatmentPlan = currentTreatmentPlan;
-                last.treatmentDetails = details;
-            }
-            alert('Live treatment saved successfully. Please continue with the Complete Treatment Session button.');
-        }
-
-        function completeTreatment() {
-            if (!currentTreatmentPlan) { alert('Please save a treatment plan first.'); return; }
-            showStep('review');
-        }
-
-        function saveCompleteSession() {
-            const review = {
-                rating: document.getElementById('sessionRating').value,
-                nextSession: document.getElementById('nextSession').value,
-                practitionerReflections: document.getElementById('practitionerReflections').value,
-                patientFeedback: document.getElementById('patientFeedback').value
-            };
-            if (savedSessions.length > 0) {
-                const last = savedSessions[savedSessions.length - 1];
-                last.completeSession = review;
-                last.completed = true;
-                last.completionDate = new Date().toISOString();
-            }
-            alert('Session review saved successfully. This session is now complete.');
-        }
-
-        function startNewSession() {
-            if (confirm('Clear the form and start a new session?')) { clearForm(); showStep('assessment'); }
-        }
-
-        function showSavedSessions() {
-            document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.step-indicator').forEach(ind => ind.classList.remove('active'));
-            document.getElementById('savedSessionsContainer').style.display = 'block';
-            displaySessions();
-        }
-
-        function hideSavedSessions() {
-            document.getElementById('savedSessionsContainer').style.display = 'none';
-            showStep('review');
-        }
-
-        function displaySessions() {
-            const list = document.getElementById('sessionsList');
-            if (savedSessions.length === 0) { list.innerHTML = '<p style="text-align:center;color:#888;font-style:italic;">No sessions saved yet.</p>'; return; }
-            let html = '';
-            [...savedSessions].reverse().forEach((session, i) => {
-                const d = new Date(session.timestamp);
-                const symptoms = session.symptomCategories?.length > 0 ? session.symptomCategories.join(', ') : 'None selected';
-                html += `<div class="session-card"><h5>Session ${savedSessions.length - i} - ${d.toLocaleDateString()} at ${session.time}</h5><div class="session-data"><div class="data-group"><strong>Constitutional:</strong> ${session.constitutionalType}${session.secondaryType ? ' / ' + session.secondaryType : ''}</div><div class="data-group"><strong>Symptoms:</strong> ${symptoms}</div><div class="data-group"><strong>Tongue:</strong> Body: ${session.tongueBodyColor} | Coating: ${session.tongueCoating}</div><div class="data-group"><strong>Treatment:</strong> ${session.treatmentPlan ? session.treatmentPlan.selectedPoints.length + ' points' : 'Not planned'}</div></div>${session.sessionNotes ? '<p style="margin-top:10px;font-style:italic;">"' + session.sessionNotes + '"</p>' : ''}</div>`;
-            });
-            list.innerHTML = html;
-        }
-
-        // ========== UPDATED EXPORT FUNCTION — ALL FIELDS ==========
-        function exportSessions() {
-            if (savedSessions.length === 0) { alert('No sessions to export yet!'); return; }
-
-            if (savedSessions.length === 1) {
-                runExport([0]);
-                return;
-            }
-
-            // Build selection dialog
-            let options = savedSessions.map((s, i) =>
-                `<label style="display:block;margin:8px 0;font-family:'Crimson Text',serif;font-size:1rem;">
-                    <input type="checkbox" value="${i}" style="margin-right:8px;width:auto;">
-                    Session ${i+1} — ${s.date} at ${s.time} (${s.constitutionalType || 'No type'})
-                </label>`
-            ).join('');
-
-            const overlay = document.createElement('div');
-            overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999;display:flex;align-items:center;justify-content:center;';
-            overlay.innerHTML = `
-                <div style="background:#fff;border:2px solid #d4af37;border-radius:12px;padding:30px;max-width:500px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
-                    <h4 style="font-family:'Cinzel',serif;color:#2c3e50;margin-bottom:15px;border-bottom:2px solid #d4af37;padding-bottom:10px;">Select Sessions to Export</h4>
-                    <div style="margin-bottom:15px;">
-                        <label style="display:block;margin:8px 0;font-family:'Crimson Text',serif;font-size:1rem;font-weight:bold;">
-                            <input type="checkbox" id="selectAllSessions" style="margin-right:8px;width:auto;" onchange="toggleAllSessions(this)">
-                            Export All Sessions
-                        </label>
-                        <hr style="border-color:#eee;margin:10px 0;">
-                        <div id="sessionCheckboxes">${options}</div>
-                    </div>
-                    <div style="display:flex;gap:10px;margin-top:20px;">
-                        <button onclick="confirmExport()" style="flex:1;background:linear-gradient(135deg,#2c3e50,#34495e);color:#d4af37;border:2px solid #d4af37;padding:12px;border-radius:8px;font-family:'Cinzel',serif;font-size:0.95rem;cursor:pointer;">📊 Export Selected</button>
-                        <button onclick="closeExportDialog()" style="flex:1;background:#f8f9fa;color:#2c3e50;border:2px solid #bdc3c7;padding:12px;border-radius:8px;font-family:'Cinzel',serif;font-size:0.95rem;cursor:pointer;">Cancel</button>
-                    </div>
-                </div>`;
-            overlay.id = 'exportDialog';
-            document.body.appendChild(overlay);
-        }
-
-        function toggleAllSessions(cb) {
-            document.querySelectorAll('#sessionCheckboxes input[type="checkbox"]').forEach(c => c.checked = cb.checked);
-        }
-
-        function closeExportDialog() {
-            const d = document.getElementById('exportDialog');
-            if (d) d.remove();
-        }
-
-        function confirmExport() {
-            const checked = [...document.querySelectorAll('#sessionCheckboxes input[type="checkbox"]:checked')].map(c => parseInt(c.value));
-            if (checked.length === 0) { alert('Please select at least one session.'); return; }
-            closeExportDialog();
-            runExport(checked);
-        }
-
-        function runExport(indices) {
-            const escape = val => '"' + String(val || '').replace(/"/g, '""') + '"';
-
-            const headers = [
-                // Basic Info
-                'Date','Time',
-                // Assessment
-                'Constitutional Type','Secondary Type',
-                'Symptom Categories','Symptom Details',
-                // Tongue
-                'Tongue Body Color','Tongue Coating','Tongue Texture','Tongue Movement',
-                'Tongue Tip','Tongue Sides','Tongue Notes',
-                // Left Hand Pulse (9 columns)
-                'Left Cun Superficial (Small Intestine)','Left Cun Middle (Heart)','Left Cun Deep (Heart)',
-                'Left Guan Superficial (Gallbladder)','Left Guan Middle (Liver)','Left Guan Deep (Liver)',
-                'Left Chi Superficial (Bladder)','Left Chi Middle (Kidney)','Left Chi Deep (Kidney)',
-                // Right Hand Pulse (9 columns)
-                'Right Cun Superficial (Large Intestine)','Right Cun Middle (Stomach)','Right Cun Deep (Lung)',
-                'Right Guan Superficial (Stomach)','Right Guan Middle (Spleen)','Right Guan Deep (Spleen)',
-                'Right Chi Superficial (Triple Warmer)','Right Chi Middle (Pericardium)','Right Chi Deep (Pericardium)',
-                // Session Notes
-                'Session Notes',
-                // Treatment Plan
-                'Causative Factor','Treatment Strategy','Treatment Rationale','Treatment Points',
-                // Live Treatment
-                'Needle Size','Average Needle Depth','Patient Immediate Response','Homework/Recommendations',
-                // Point-by-Point Details
-                'Point Details (Sensation | Depth | Manipulation | Retention | Notes)',
-                // Session Review
-                'Session Rating','Next Session Date','Practitioner Reflections','Patient Feedback',
-                // Meta
-                'Session Completed','Completion Date'
-            ];
-
-            const rows = indices.map(i => { const s = savedSessions[i];
-                const tp = s.treatmentPlan || {};
-                const td = s.treatmentDetails || {};
-                const cs = s.completeSession || {};
-
-                const treatmentPoints = tp.selectedPoints
-                    ? tp.selectedPoints.map(p => `${p.spiritualName} (${p.code})`).join('; ')
-                    : '';
-
-                const pointDetails = td.pointDetails
-                    ? td.pointDetails.map(p =>
-                        `${p.pointName}: Sensation=${p.sensation} | Depth=${p.depth} | Manipulation=${p.manipulation} | Retention=${p.retention}min | Notes=${p.notes}`
-                      ).join(' || ')
-                    : '';
-
-                return [
-                    s.date, s.time,
-                    s.constitutionalType, s.secondaryType,
-                    (s.symptomCategories || []).join('; '), s.symptomDetails,
-                    s.tongueBodyColor, s.tongueCoating, s.tongueTexture, s.tongueMovement,
-                    s.tongueTip, s.tongueSides, s.tongueNotes,
-                    s.leftCunSuperficial, s.leftCunMiddle, s.leftCunDeep,
-                    s.leftGuanSuperficial, s.leftGuanMiddle, s.leftGuanDeep,
-                    s.leftChiSuperficial, s.leftChiMiddle, s.leftChiDeep,
-                    s.rightCunSuperficial, s.rightCunMiddle, s.rightCunDeep,
-                    s.rightGuanSuperficial, s.rightGuanMiddle, s.rightGuanDeep,
-                    s.rightChiSuperficial, s.rightChiMiddle, s.rightChiDeep,
-                    s.sessionNotes,
-                    tp.causativeFactor, tp.strategy, tp.rationale, treatmentPoints,
-                    td.needleSize, td.needleDepth, td.patientResponse, td.homework,
-                    pointDetails,
-                    cs.rating, cs.nextSession, cs.practitionerReflections, cs.patientFeedback,
-                    s.completed ? 'Yes' : 'No',
-                    s.completionDate ? new Date(s.completionDate).toLocaleDateString() : ''
-                ].map(escape).join(',');
-            });
-
-            const csv = [headers.map(escape).join(','), ...rows].join('\n');
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `five-element-sessions-${new Date().toISOString().split('T')[0]}.csv`;
-            a.click();
-            URL.revokeObjectURL(url);
-            alert(`Exported ${indices.length} session(s) — all fields included.`);
-        }
-
-        function clearForm() {
-            document.getElementById('constitutionalType').value = 'Wood';
-            document.getElementById('secondaryType').value = '';
-            document.getElementById('symptomCategories').selectedIndex = -1;
-            document.getElementById('symptomDetails').value = '';
-            document.getElementById('tongueBodyColor').value = '';
-            document.getElementById('tongueCoating').value = '';
-            document.getElementById('tongueTexture').value = '';
-            document.getElementById('tongueMovement').value = '';
-            document.getElementById('tongueTip').value = '';
-            document.getElementById('tongueSides').value = '';
-            document.getElementById('tongueNotes').value = '';
-            document.getElementById('sessionNotes').value = '';
-            ['leftCunSuperficial','leftCunMiddle','leftCunDeep','leftGuanSuperficial','leftGuanMiddle','leftGuanDeep','leftChiSuperficial','leftChiMiddle','leftChiDeep','rightCunSuperficial','rightCunMiddle','rightCunDeep','rightGuanSuperficial','rightGuanMiddle','rightGuanDeep','rightChiSuperficial','rightChiMiddle','rightChiDeep'].forEach(id => document.getElementById(id).value = '');
-            document.getElementById('sessionDate').valueAsDate = new Date();
-            const n = new Date();
-            document.getElementById('sessionTime').value = n.getHours().toString().padStart(2,'0') + ':' + n.getMinutes().toString().padStart(2,'0');
-            selectedPoints = [];
-            currentTreatmentPlan = null;
-        }
-    </script>
 </body>
 </html>
