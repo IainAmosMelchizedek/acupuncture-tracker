@@ -740,6 +740,7 @@
                     </div>
                 </div>
 
+                <button class="btn" onclick="saveLiveTreatment()">💾 Save Live Treatment</button>
                 <button class="btn btn-success" onclick="completeTreatment()">Complete Treatment Session →</button>
             </div>
 
@@ -880,8 +881,7 @@
                 sessionNotes: document.getElementById('sessionNotes').value
             };
             savedSessions.push(sessionData);
-            alert(`Assessment saved successfully! You now have ${savedSessions.length} saved session(s).`);
-            if (confirm('Clear form for next session?')) clearForm();
+            alert('Patient assessment saved successfully. Please continue with the Complete Assessment button.');
         }
 
         function initializePointList() {
@@ -932,8 +932,7 @@
                 rationale: document.getElementById('treatmentRationale').value,
                 selectedPoints: selectedPoints.map(p => ({ id:p.id, code:p.code, spiritualName:p.spiritualName, element:p.element, meridian:p.meridian, resonance:p.resonance }))
             };
-            alert(`Treatment plan saved with ${selectedPoints.length} points.`);
-            showStep('treatment');
+            alert('Treatment plan saved successfully. Please continue with the Proceed to Live Treatment button.');
         }
 
         function initializeTreatmentLog() {
@@ -946,8 +945,8 @@
             log.innerHTML = html;
         }
 
-        function completeTreatment() {
-            if (!currentTreatmentPlan) { alert('Please save a treatment plan first.'); return; }
+        function saveLiveTreatment() {
+            if (!currentTreatmentPlan) { alert('Please save a treatment plan before saving the live treatment.'); return; }
             const details = {
                 needleSize: document.getElementById('needleSize').value,
                 needleDepth: document.getElementById('needleDepth').value,
@@ -970,7 +969,11 @@
                 last.treatmentPlan = currentTreatmentPlan;
                 last.treatmentDetails = details;
             }
-            alert('Treatment session completed!');
+            alert('Live treatment saved successfully. Please continue with the Complete Treatment Session button.');
+        }
+
+        function completeTreatment() {
+            if (!currentTreatmentPlan) { alert('Please save a treatment plan first.'); return; }
             showStep('review');
         }
 
@@ -987,8 +990,8 @@
                 last.completed = true;
                 last.completionDate = new Date().toISOString();
             }
-            alert('Complete session saved! The healing journey continues...');
-            if (confirm('Would you like to start a new session?')) { clearForm(); showStep('assessment'); }
+            alert('Session review saved successfully. This session is now complete.');
+            if (confirm('Clear the form and start a new session?')) { clearForm(); showStep('assessment'); }
         }
 
         function showSavedSessions() {
